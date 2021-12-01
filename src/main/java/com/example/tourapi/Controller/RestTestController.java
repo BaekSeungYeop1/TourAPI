@@ -15,14 +15,14 @@ public class RestTestController {
     public String callApi() {
         StringBuilder result = new StringBuilder();
         try {
-            String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/RusService/detailInfo?" +
+            String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailInfo?" +
                     "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
                     "&numOfRows=10" +
                     "&pageNo=1" +
                     "&MobileOS=ETC" +
                     "&MobileApp=AppTest" +
-                    "&contentId=336061" +
-                    "&contentTypeId=76" +
+                    "&contentId=2674675" +
+                    "&contentTypeId=15" +
                     "&_type=json";
 
             URL url = new URL(apiUrl);
