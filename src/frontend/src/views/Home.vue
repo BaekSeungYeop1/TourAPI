@@ -1,18 +1,38 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <div v-for="(user, idx) in users" :key="idx">
+      <h2>{{user.first_name}}</h2>
+      <img :src="`${user.avatar}`" alt />
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import axios from "axios";
 
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      users: null,
+      totalPage: null,
+      pageNum: 2
+    };
+  },
+  methods: {
+    fetchData(pageNum) {
+      axios
+        .get("https://reqres.in/api/users?page=" + pageNum)
+        .then(res => {
+          this.users = res.data.data;
+          this.totalPage = res.data.total_pages;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  },
+  created() {
+    this.fetchData(this.pageNum);
   }
-}
+};
 </script>
