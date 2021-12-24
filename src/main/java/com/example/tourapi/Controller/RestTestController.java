@@ -1,6 +1,8 @@
 package com.example.tourapi.Controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.BufferedReader;
@@ -9,20 +11,23 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 @RestController
+@Slf4j
 public class RestTestController {
 
     @GetMapping("/apitest")
     public String callApi() {
         StringBuilder result = new StringBuilder();
         try {
-            String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailInfo?" +
+            String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?" +
                     "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
-                    "&numOfRows=10" +
                     "&pageNo=1" +
-                    "&MobileOS=ETC" +
+                    "&numOfRows=10" +
                     "&MobileApp=AppTest" +
-                    "&contentId=2674675" +
-                    "&contentTypeId=15" +
+                    "&MobileOS=ETC" +
+                    "&arrange=A" +
+                    "&contentTypeld=12" +
+                    "&areaCode=4" +
+                    "&listYN=Y" +
                     "&_type=json";
 
             URL url = new URL(apiUrl);
@@ -43,4 +48,5 @@ public class RestTestController {
 
         return result.toString();
     }
+
 }

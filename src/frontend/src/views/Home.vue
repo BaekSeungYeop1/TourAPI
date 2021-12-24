@@ -1,38 +1,27 @@
 <template>
-  <div>
-    <div v-for="(user, idx) in users" :key="idx">
-      <h2>{{user.first_name}}</h2>
-      <img :src="`${user.avatar}`" alt />
-    </div>
-  </div>
+  <v-container>
+    <v-card style="width: 30%">
+      <v-text-field v-model="b1" label="1 or 2"></v-text-field>
+      <v-btn outlined @click="button">Click</v-btn>
+      <p>{{a}}</p>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
-  data() {
-    return {
-      users: null,
-      totalPage: null,
-      pageNum: 2
-    };
-  },
+  name: 'App',
+  data: () => ({
+    b1: '',
+    a: ''
+  }),
   methods: {
-    fetchData(pageNum) {
-      axios
-        .get("https://reqres.in/api/users?page=" + pageNum)
-        .then(res => {
-          this.users = res.data.data;
-          this.totalPage = res.data.total_pages;
-        })
-        .catch(err => {
-          console.log(err);
-        });
+    button () {
+      this.$axios.get('/apitest', { params: { tEst: this.b1 } }).then(result => {
+        console.log(result.data)
+        this.a = result.data
+      })
     }
-  },
-  created() {
-    this.fetchData(this.pageNum);
   }
-};
+}
 </script>
