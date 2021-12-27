@@ -14,6 +14,7 @@ import java.net.URL;
 @Slf4j
 public class RestTestController {
 
+    // https://wildeveloperetrain.tistory.com/62
     @GetMapping("/apitest")
     public String callApi() {
         StringBuilder result = new StringBuilder();
