@@ -16,12 +16,13 @@ public class RestTestController {
 
     // https://wildeveloperetrain.tistory.com/62
     @GetMapping("/apitest")
-    public String callApi() {
+    public String callApi(@RequestParam("tEst")String test) {
         StringBuilder result = new StringBuilder();
+        log.info("test = " + test);
         try {
             String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?" +
                     "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
-                    "&pageNo=1" +
+                    "&pageNo=" + test +
                     "&numOfRows=10" +
                     "&MobileApp=AppTest" +
                     "&MobileOS=ETC" +

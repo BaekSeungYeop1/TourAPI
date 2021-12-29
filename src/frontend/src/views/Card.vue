@@ -17,6 +17,7 @@
             <div>{{ tour.title }}</div>
             <div>{{ tour.readcount }}</div>
             <div>주소: {{ tour.addr1 }}</div>
+            <div>토탈: {{ paging.totalCount }}</div>
           </v-card-text>
           <v-divider/>
           <v-card-actions>
@@ -28,28 +29,64 @@
         </v-card>
       </v-flex>
     </v-layout>
+    <v-pagination
+      v-model="pageNo"
+      :length="numOfPages"
+      @input="updatePage">
+      </v-pagination>
   </v-container>
 </template>
 
 <script>
 export default {
   data: () => ({
-    tours:[]
+    tours:[],
+    paging:[],
+    pageNo: 1,
+    numOfRows: 10,
+    historyList: []
   }),
+  created(){
+    this.updatePage(this.pageNo)
+  },
+  mounted(){
+    this.retrieveUsers(this.pageNo);
+  },
   methods: {
-    retrieveUsers(){
-      this.$axios.get("/apitest")
+    retrieveUsers(pageNo){
+      this.$axios.get("/apitest?tEst=" + pageNo)
           .then(response=>{
             this.tours = response.data.response.body.items.item;
+            this.paging = response.data.response.body;
             console.log(response.data);
           })
           .catch(e=>{
             console.log(e);
           })
+    },
+    updatePage(pageIndex){
+      let start = (pageIndex - 1) * this.numOfRows;
+      let end = pageIndex * this.numOfRows;
+      this.tours = this.tours.slice(start,end);
+      this.pageNo = pageIndex;
+      this.$axios.get("/apitest?tEst=" + pageIndex)
+          .then(response=>{
+            this.tours = response.data.response.body.items.item;
+            this.paging = response.data.response.body;
+            console.log(response.data);
+          })
+          .catch(e=>{
+            console.log(e);
+          })
+      
+      console.log(this.pageNo)
     }
   },
-  mounted(){
-    this.retrieveUsers();
+  computed: {
+    numOfPages () { 
+      return Math.ceil(this.paging.totalCount / this.numOfRows);
+    }
+    
   }
 }
 </script>
