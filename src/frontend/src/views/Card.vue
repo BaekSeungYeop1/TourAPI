@@ -32,6 +32,7 @@
     <v-pagination
       v-model="pageNo"
       :length="numOfPages"
+      total-visible="10"
       @input="updatePage">
       </v-pagination>
   </v-container>
@@ -54,7 +55,7 @@ export default {
   },
   methods: {
     retrieveUsers(pageNo){
-      this.$axios.get("/apitest?tEst=" + pageNo)
+      this.$axios.get("/apitest/?pageNo=" + pageNo)
           .then(response=>{
             this.tours = response.data.response.body.items.item;
             this.paging = response.data.response.body;
@@ -67,9 +68,10 @@ export default {
     updatePage(pageIndex){
       let start = (pageIndex - 1) * this.numOfRows;
       let end = pageIndex * this.numOfRows;
-      this.tours = this.tours.slice(start,end);
+      this.historyList = this.tours.slice(start,end);
       this.pageNo = pageIndex;
-      this.$axios.get("/apitest?tEst=" + pageIndex)
+      
+      this.$axios.get("/apitest/?pageNo=" + pageIndex)
           .then(response=>{
             this.tours = response.data.response.body.items.item;
             this.paging = response.data.response.body;
