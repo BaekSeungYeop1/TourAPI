@@ -146,4 +146,41 @@ public class TourApiService {
 
         return result.toString();
     }
+
+    public String getCommonInfo(int contentId) {
+        StringBuilder result = new StringBuilder();
+        try {
+            String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?" +
+                    "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
+                    "&MobileApp=AppTest" +
+                    "&MobileOS=ETC" +
+                    "&pageNo=1" +
+                    "&numOfRows=10" +
+                    "&contentId=" + contentId +
+                    "&defaultYN=" +
+                    "&firstImageYN=Y" +
+                    "&addrinfoYN=Y" +
+                    "&mapinfoYN=Y" +
+                    "&overviewYN=Y" +
+                    "&_type=json";
+
+            URL url = new URL(apiUrl);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("GET");
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
+
+            String returnLine;
+
+            while((returnLine = bufferedReader.readLine()) != null) {
+                result.append(returnLine + "\n");
+            }
+            urlConnection.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result.toString();
+    }
+
 }

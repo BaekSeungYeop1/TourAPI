@@ -44,6 +44,12 @@ public class TourApiController {
         return tourApiService.getKeyword(Searchkeyword);
     }
 
+    // 공통정보 조회
+    @GetMapping("/commonInfo")
+    public String getCommonInfo(@RequestParam int contentId){
+        return tourApiService.getCommonInfo(contentId);
+    }
+
 
     // 상세정보
     @GetMapping("/detailInfo")
