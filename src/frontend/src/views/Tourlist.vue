@@ -1,4 +1,5 @@
 <template>
+<v-app>
   <v-container grid-list-xl>
     <v-layout row wrap>
       <v-flex
@@ -17,7 +18,7 @@
             <div>{{ tour.title }}</div>
             <div>{{ tour.readcount }}</div>
             <div>주소: {{ tour.addr1 }}</div>
-            <div>토탈: {{ paging.totalCount }}</div>
+            <div>전화번호: {{ tour.tel }}</div>
           </v-card-text>
           <v-divider/>
           <v-card-actions>
@@ -36,29 +37,39 @@
       @input="updatePage">
       </v-pagination>
   </v-container>
+</v-app>
 </template>
 
 <script>
 export default {
   data: () => ({
     tours:[],
-    paging:[],
     pageNo: 1,
     numOfRows: 10,
-    historyList: []
+    historyList: [],
+    area:[],
+    paging:[],
+    selectedArea: undefined 
   }),
   created(){
-    this.updatePage(this.pageNo)
+    this.updatePage(this.pageNo);
   },
   mounted(){
-    this.retrieveUsers(this.pageNo);
+    this.getTourList(this.pageNo);
   },
+  computed: {
+    numOfPages () { 
+      return Math.ceil(this.paging.totalCount / this.numOfRows);
+    }
+  },
+ 
   methods: {
-    retrieveUsers(pageNo){
-      this.$axios.get("/apitest/?pageNo=" + pageNo)
+    getTourList(pageNo){
+      let areaCode = this.$route.query.areaCode
+      let subAreaCode = this.$route.query.subAreaCode
+      this.$axios.get("/apitest/?pageNo=" + pageNo + "&areaCode=" + areaCode + "&subAreaCode=" + subAreaCode)
           .then(response=>{
             this.tours = response.data.response.body.items.item;
-            this.paging = response.data.response.body;
             console.log(response.data);
           })
           .catch(e=>{
@@ -66,12 +77,14 @@ export default {
           })
     },
     updatePage(pageIndex){
+      let areaCode = this.$route.query.areaCode
+      let subAreaCode = this.$route.query.subAreaCode
       let start = (pageIndex - 1) * this.numOfRows;
       let end = pageIndex * this.numOfRows;
       this.historyList = this.tours.slice(start,end);
       this.pageNo = pageIndex;
       
-      this.$axios.get("/apitest/?pageNo=" + pageIndex)
+      this.$axios.get("/apitest/?pageNo=" + pageIndex + "&areaCode=" + areaCode + "&subAreaCode=" + subAreaCode)
           .then(response=>{
             this.tours = response.data.response.body.items.item;
             this.paging = response.data.response.body;
@@ -79,16 +92,12 @@ export default {
           })
           .catch(e=>{
             console.log(e);
-          })
+          }),
+          
       
       console.log(this.pageNo)
-    }
-  },
-  computed: {
-    numOfPages () { 
-      return Math.ceil(this.paging.totalCount / this.numOfRows);
-    }
-    
+    },
   }
+  
 }
 </script>

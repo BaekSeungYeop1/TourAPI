@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
+
 const routes = [
   {
     path: '/',
@@ -16,9 +17,19 @@ const routes = [
     component: () => import('../views/About.vue')
   },
   {
-    path: '/card',
-    name: 'Card',
-    component: () => import('../views/Card.vue')
+    path: '/tourlist',
+    name: 'Tourlist',
+    component: () => import('../views/Tourlist.vue')
+  },
+  {
+    path: '/searchbar',
+    name: 'Searchbar',
+    component: () => import('../views/Searchbar.vue')
+  },
+  {
+    path: '/cc',
+    name: 'CC',
+    component: () => import('../views/Aboutpaging.vue')
   }
 ]
 
