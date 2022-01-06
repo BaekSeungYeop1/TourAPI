@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -21,8 +22,8 @@ public class TourApiController {
 
     // 지역기반 검색
     @GetMapping("/")
-    public String getTourApi(@RequestParam int pageNo) {
-        return tourApiService.getTourApi(pageNo);
+    public String getTourApi(@RequestParam int pageNo, int areaCode, int subAreaCode) {
+        return tourApiService.getTourApi(pageNo,areaCode,subAreaCode);
     }
 
     // 지역코드 정보 조회
@@ -39,7 +40,7 @@ public class TourApiController {
 
     // 키워드 조회
     @GetMapping("/searchKeyword")
-    public String getKeyword(@RequestParam String Searchkeyword){
+    public String getKeyword(@RequestParam String Searchkeyword) throws UnsupportedEncodingException {
         log.info(Searchkeyword);
         return tourApiService.getKeyword(Searchkeyword);
     }
