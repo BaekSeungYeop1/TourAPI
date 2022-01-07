@@ -71,7 +71,7 @@ export default {
           })
     },
     searchEvent(areaCode,subAreaCode){
-      this.$router.push({path:"./tourlist", query:{areaCode,subAreaCode}});
+      this.$router.push({path:"./areatourlist", query:{areaCode,subAreaCode}});
     },
     searchEvent2(){
       console.log(this.areaCode)

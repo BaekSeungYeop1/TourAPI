@@ -17,9 +17,14 @@ const routes = [
     component: () => import('../views/About.vue')
   },
   {
-    path: '/tourlist',
-    name: 'Tourlist',
-    component: () => import('../views/Tourlist.vue')
+    path: '/areatourlist',
+    name: 'AreaTourlist',
+    component: () => import('../views/AreaTourlist.vue')
+  },
+  {
+    path: '/keywordtourlist',
+    name: 'KeywordTourlist',
+    component: () => import('../views/KeywordTourlist.vue')
   },
   {
     path: '/searchbar',
@@ -27,9 +32,9 @@ const routes = [
     component: () => import('../views/Searchbar.vue')
   },
   {
-    path: '/cc',
-    name: 'CC',
-    component: () => import('../views/Aboutpaging.vue')
+    path: '/appbar',
+    name: 'Appbar',
+    component: () => import('../views/Appbar.vue')
   }
 ]
 

@@ -83,14 +83,14 @@ public class TourApiService {
             return useTourApi(apiUrl);
     }
 
-    public String getKeyword(String Searchkeyword) throws UnsupportedEncodingException {
+    public String getKeyword(int pageNo, String Searchkeyword) throws UnsupportedEncodingException {
         String keyword = URLEncoder.encode(Searchkeyword,"UTF-8");
         log.info(keyword);
         String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword?" +
                 "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
                 "&MobileApp=AppTest" +
                 "&MobileOS=ETC" +
-                "&pageNo=1" +
+                "&pageNo=" + pageNo +
                 "&numOfRows=10" +
                 "&listYN=Y" +
                 "&arrange=A" +

@@ -40,9 +40,9 @@ public class TourApiController {
 
     // 키워드 조회
     @GetMapping("/searchKeyword")
-    public String getKeyword(@RequestParam String Searchkeyword) throws UnsupportedEncodingException {
+    public String getKeyword(@RequestParam int pageNo, String Searchkeyword) throws UnsupportedEncodingException {
         log.info(Searchkeyword);
-        return tourApiService.getKeyword(Searchkeyword);
+        return tourApiService.getKeyword(pageNo,Searchkeyword);
     }
 
     // 공통정보 조회
