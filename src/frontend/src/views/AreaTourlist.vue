@@ -7,7 +7,9 @@
         sm4
         v-for="(tour, index) in tours"
         :key="index">
-        <v-card>
+        <v-card
+        @click="clickEvent(tour.contentid)"        
+        >
             <v-img
             aspect-ratio="2"
             :src="tour.firstimage">
@@ -97,6 +99,11 @@ export default {
       
       console.log(this.pageNo)
     },
+    clickEvent(commonInfo){
+      //let commonInfo = this.tour.contentid;
+      console.log(commonInfo);
+      this.$router.push({path:"./commoninfo",query:{commonInfo}});
+    }
   }
   
 }

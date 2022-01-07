@@ -103,6 +103,7 @@ public class TourApiService {
     }
 
     public String getCommonInfo(int contentId) {
+        log.info(String.valueOf(contentId));
         String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?" +
                 "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
                 "&MobileApp=AppTest" +
@@ -110,7 +111,7 @@ public class TourApiService {
                 "&pageNo=1" +
                 "&numOfRows=10" +
                 "&contentId=" + contentId +
-                "&defaultYN=" +
+                "&defaultYN=Y" +
                 "&firstImageYN=Y" +
                 "&addrinfoYN=Y" +
                 "&mapinfoYN=Y" +
