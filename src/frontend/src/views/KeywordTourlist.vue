@@ -19,12 +19,8 @@
               />
             </v-img>
             <v-card-text>
-              <div>
-                {{ tour.title }}
-              </div>
-              <div>{{ tour.readcount }}</div>
-              <div>주소: {{ tour.addr1 }}</div>
-              <div>전화번호: {{ tour.tel }}</div>
+              <div>{{ tour.title }}</div>
+              <div>{{ tour.addr1 }}</div>
             </v-card-text>
             <v-divider />
             <v-card-actions>

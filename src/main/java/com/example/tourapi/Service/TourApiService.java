@@ -26,7 +26,7 @@ public class TourApiService {
                 String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?" +
                         "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
                         "&pageNo=" + pageNo +
-                        "&numOfRows=10" +
+                        "&numOfRows=9" +
                         "&MobileApp=AppTest" +
                         "&MobileOS=ETC" +
                         "&arrange=A" +
@@ -41,7 +41,7 @@ public class TourApiService {
             String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?" +
                     "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
                     "&pageNo=" + pageNo +
-                    "&numOfRows=10" +
+                    "&numOfRows=9" +
                     "&MobileApp=AppTest" +
                     "&MobileOS=ETC" +
                     "&arrange=A" +
@@ -57,7 +57,7 @@ public class TourApiService {
             String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?" +
                     "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
                     "&pageNo=" + pageNo +
-                    "&numOfRows=10" +
+                    "&numOfRows=9" +
                     "&MobileApp=AppTest" +
                     "&MobileOS=ETC" +
                     "&arrange=A" +
@@ -107,7 +107,7 @@ public class TourApiService {
                 "&MobileApp=AppTest" +
                 "&MobileOS=ETC" +
                 "&pageNo=" + pageNo +
-                "&numOfRows=10" +
+                "&numOfRows=9" +
                 "&listYN=Y" +
                 "&arrange=A" +
                 "&keyword=" + keyword +

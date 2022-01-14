@@ -21,10 +21,12 @@
               />
             </v-img>
             <v-card-text>
-              <div>{{ tour.title }}</div>
-              <div>{{ tour.readcount }}</div>
-              <div>주소: {{ tour.addr1 }}</div>
-              <div>전화번호: {{ tour.tel }}</div>
+              <div class="text-h6 pa-2 font-weight-black">
+                {{ tour.title }}
+              </div>
+              <div class="pa-2">
+                {{ tour.addr1 }}
+              </div>
             </v-card-text>
             <v-divider />
             <v-card-actions>
@@ -62,13 +64,15 @@
 </template>
 
 <script>
+
+
 export default {
   data: () => ({
-    tours:[],
-    pageNo: 1,
-    numOfRows: 10,
-    paging:[],
-    selectedArea: undefined
+    tours:[],             // 관광지 정보
+    pageNo: 1,            // 페이징하기위한 페이지 번호
+    numOfRows: 9,        // 페이지 당 출력되는 개수
+    paging:[],            // 출력되는 관광지 총 갯수를 알기위해 paging.totalcount
+    selectedArea: undefined,
   }),
   computed: {
     numOfPages () {
@@ -116,7 +120,7 @@ export default {
       //let commonInfo = this.tour.contentid;
       console.log(contentid);
       this.$router.push({path:"./commoninfo1",query:{contentid}});
-    }
+    },
   }
 
 }

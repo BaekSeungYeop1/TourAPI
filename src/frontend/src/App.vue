@@ -40,17 +40,17 @@
         nav
       >
         <v-list-item
-          v-for="item in items"
-          :key="item.title"
+          v-for="category in categories"
+          :key="category.type"
           link
-          :to="item.to"
+          :to="category.to"
         >
           <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon>{{ category.icon }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title>{{ category.type }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -76,6 +76,16 @@ export default {
   data: () => ({
     searchKeyword: "",
     drawer : false,
+    categories : [
+       {type : "관광지" , contentid: "12", icon: 'mdi-image', to: '/'},
+       {type : "문화시설" , contentid: "14", icon: 'mdi-image', to: '/'},
+       {type : "행사/축제" , contentid: "15", icon: 'mdi-image', to: '/'},
+       {type : "여행코스" , contentid: "25", icon: 'mdi-image', to: '/'},
+       {type : "레포츠" , contentid: "28", icon: 'mdi-image', to: '/'},
+       {type : "숙박" , contentid: "32", icon: 'mdi-image', to: '/'},
+       {type : "쇼핑" , contentid: "38", icon: 'mdi-image', to: '/'},
+       {type : "음식점" , contentid: "39", icon: 'mdi-image', to: '/'},
+     ],
     items: [
       { title: 'Dashboard', icon: 'mdi-view-dashboard', to: '/' },
       { title: 'Grid System', icon: 'mdi-image', to: '/grid-system' },
