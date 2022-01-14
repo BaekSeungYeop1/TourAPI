@@ -1,43 +1,64 @@
 <template>
-<v-app>
-  <v-container grid-list-xl>
-    <v-layout row wrap>
-      <v-flex
-        xs12
-        sm4
-        v-for="(tour, index) in tours"
-        :key="index">
-        <v-card>
+  <v-app>
+    <v-container>
+      <v-row>
+        <v-col
+          v-for="(tour, index) in tours"
+          :key="index"
+          cols="12"
+          sm="4"
+        >
+          <v-card>
             <v-img
-            aspect-ratio="2"
-            :src="tour.firstimage">
-            <v-container fill-height fluid>
-          </v-container>
-          </v-img>
-          <v-card-text>
-            <div>{{ tour.title }}</div>
-            <div>{{ tour.readcount }}</div>
-            <div>주소: {{ tour.addr1 }}</div>
-            <div>전화번호: {{ tour.tel }}</div>
-          </v-card-text>
-          <v-divider/>
-          <v-card-actions>
-            <v-spacer/>
-            <v-icon small class="px-2">mdi-favorite</v-icon><span>0</span>
-            <v-icon small class="px-2">mdi-comment</v-icon><span>0</span>
-            <v-icon small class="px-2">mdi-visibility</v-icon><span>0</span>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-    </v-layout>
-    <v-pagination
-      v-model="pageNo"
-      :length="numOfPages"
-      total-visible="10"
-      @input="updatePage">
-      </v-pagination>
-  </v-container>
-</v-app>
+              aspect-ratio="2"
+              :src="tour.firstimage"
+            >
+              <v-container
+                fill-height
+                fluid
+              />
+            </v-img>
+            <v-card-text>
+              <div>
+                {{ tour.title }}
+              </div>
+              <div>{{ tour.readcount }}</div>
+              <div>주소: {{ tour.addr1 }}</div>
+              <div>전화번호: {{ tour.tel }}</div>
+            </v-card-text>
+            <v-divider />
+            <v-card-actions>
+              <v-spacer />
+              <v-icon
+                small
+                class="px-2"
+              >
+                mdi-favorite
+              </v-icon><span>0</span>
+              <v-icon
+                small
+                class="px-2"
+              >
+                mdi-comment
+              </v-icon><span>0</span>
+              <v-icon
+                small
+                class="px-2"
+              >
+                mdi-visibility
+              </v-icon><span>0</span>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-pagination
+        v-model="pageNo"
+        :length="numOfPages"
+        total-visible="10"
+        @input="updatePage"
+      />
+    </v-container>
+  </v-app>
 </template>
 
 <script>
@@ -46,27 +67,24 @@ export default {
     tours:[],
     pageNo: 1,
     numOfRows: 10,
-    historyList: [],
-    area:[],
     paging:[],
-    selectedArea: undefined 
+    selectedArea: undefined
   }),
-  created(){
-    this.updatePage(this.pageNo);
-  },
-  mounted(){
-    this.getTourList(this.pageNo);
-  },
   computed: {
-    numOfPages () { 
+    numOfPages () {
       return Math.ceil(this.paging.totalCount / this.numOfRows);
     }
   },
- 
+  mounted(){
+    this.getTourList();
+    this.updatePage(this.pageNo);
+  },
+
   methods: {
-    getTourList(pageNo){
+    getTourList(){
+      let pageNo = 1
       let searchKeyword = this.$route.query.keyword
-      this.$axios.get("/apitest/searchKeyword?pageNo=" + pageNo + "&Searchkeyword=" + searchKeyword)
+      this.$axios.get("/apitest/searchKeyword?" + "pageNo=" + pageNo + "&Searchkeyword=" + searchKeyword)
           .then(response=>{
             this.tours = response.data.response.body.items.item;
             console.log(response.data);
@@ -78,12 +96,9 @@ export default {
     },
     updatePage(pageIndex){
       let searchKeyword = this.$route.query.keyword
-      let start = (pageIndex - 1) * this.numOfRows;
-      let end = pageIndex * this.numOfRows;
-      this.historyList = this.tours.slice(start,end);
       this.pageNo = pageIndex;
-      
-      this.$axios.get("/apitest/searchKeyword?pageNo=" + pageIndex + "&Searchkeyword=" + searchKeyword)
+
+      this.$axios.get("/apitest/searchKeyword?" + "pageNo=" + pageIndex + "&Searchkeyword=" + searchKeyword)
           .then(response=>{
             this.tours = response.data.response.body.items.item;
             this.paging = response.data.response.body;
@@ -92,11 +107,11 @@ export default {
           .catch(e=>{
             console.log(e);
           }),
-          
-      
+
+
       console.log(this.pageNo)
     },
   }
-  
+
 }
 </script>

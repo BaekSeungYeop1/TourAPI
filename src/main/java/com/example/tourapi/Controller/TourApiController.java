@@ -21,7 +21,7 @@ public class TourApiController {
     // https://wildeveloperetrain.tistory.com/62
 
     // 지역기반 검색
-    @GetMapping("/")
+    @GetMapping("/areaBasedList")
     public String getTourApi(@RequestParam int pageNo, int areaCode, int subAreaCode) {
         return tourApiService.getTourApi(pageNo,areaCode,subAreaCode);
     }
@@ -36,6 +36,12 @@ public class TourApiController {
    @GetMapping("/subareacode")
     public String getSubAreaCode(@RequestParam int areaCode) {
         return tourApiService.getSubAreaCode(areaCode);
+    }
+
+    // 서비스 분류 정보 조회
+    @GetMapping("/categorycode")
+    public String getCategoryCode(){
+        return tourApiService.getCategoryCode();
     }
 
     // 키워드 조회

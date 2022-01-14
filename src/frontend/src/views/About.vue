@@ -1,19 +1,33 @@
 <template>
-<div id="app">
-	<v-app>
-		<div class="text-center">
-			<v-card class="mt-4 mb-4 mx-auto" max-width="200" v-for="(item, index) in historyList" :key="index">
-				<v-img class="white--text align-end" height="150px" :lazy-src="item.image">
-					<v-card-title>{{item.title}}</v-card-title>
-				</v-img>
-				<v-card-text class="text--primary">
-					<div>{{item.description}}</div>
-				</v-card-text>
-			</v-card>
-			<v-pagination class="pagination mb-2" v-model="page" :length="pages" @input="updatePage"></v-pagination>
-		</div>
-	</v-app>
-</div>    
+  <div id="app">
+    <v-app>
+      <div class="text-center">
+        <v-card
+          v-for="(item, index) in historyList"
+          :key="index"
+          class="mt-4 mb-4 mx-auto"
+          max-width="200"
+        >
+          <v-img
+            class="white--text align-end"
+            height="150px"
+            :lazy-src="item.image"
+          >
+            <v-card-title>{{ item.title }}</v-card-title>
+          </v-img>
+          <v-card-text class="text--primary">
+            <div>{{ item.description }}</div>
+          </v-card-text>
+        </v-card>
+        <v-pagination
+          v-model="page"
+          class="pagination mb-2"
+          :length="pages"
+          @input="updatePage"
+        />
+      </div>
+    </v-app>
+  </div>    
 </template>
 
 <script>
@@ -178,6 +192,13 @@ export default {
 			historyList: []
 		};
 	},
+	computed: {
+		pages() {
+			let _this = this;
+			if (_this.pageSize == null || _this.listCount == null) return 0;
+			return Math.ceil(_this.listCount / _this.pageSize);
+		}
+	},
 	created() {
 		let _this = this;
 		_this.initPage();
@@ -199,13 +220,6 @@ export default {
 			let _end = pageIndex * _this.pageSize;
 			_this.historyList = _this.list.slice(_start, _end);
 			_this.page = pageIndex;
-		}
-	},
-	computed: {
-		pages() {
-			let _this = this;
-			if (_this.pageSize == null || _this.listCount == null) return 0;
-			return Math.ceil(_this.listCount / _this.pageSize);
 		}
 	},
 };

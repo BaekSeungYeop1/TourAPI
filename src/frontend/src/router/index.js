@@ -7,6 +7,7 @@ import KeywordTourlist from '@/views/KeywordTourlist.vue'
 import Searchbar from '@/views/Searchbar.vue'
 import Appbar from '@/views/Appbar.vue'
 import CommonInfo from '@/views/CommonInfo.vue'
+import CommonInfo1 from '@/views/CommonInfo copy.vue'
 
 Vue.use(VueRouter)
 
@@ -46,6 +47,11 @@ const routes = [
     path: '/commoninfo',
     name: 'CommonInfo',
     component: CommonInfo
+  },
+  {
+    path: '/commoninfo1',
+    name: 'CommonInfo1',
+    component: CommonInfo1
   }
 ]
 

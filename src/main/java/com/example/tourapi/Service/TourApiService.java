@@ -36,8 +36,24 @@ public class TourApiService {
                         "&_type=json";
 
                 return useTourApi(apiUrl);
-        }
 
+        }else if(areaCode != 0 & subAreaCode == 0) {
+            String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?" +
+                    "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
+                    "&pageNo=" + pageNo +
+                    "&numOfRows=10" +
+                    "&MobileApp=AppTest" +
+                    "&MobileOS=ETC" +
+                    "&arrange=A" +
+                    "&contentTypeld=12" +
+                    "&areaCode=" + areaCode +
+                    "&listYN=Y" +
+                    "&sponsor1telYN=Y" +
+                    "&_type=json";
+
+            return useTourApi(apiUrl);
+
+        }
             String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?" +
                     "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
                     "&pageNo=" + pageNo +
@@ -145,4 +161,15 @@ public class TourApiService {
 
     }
 
+    public String getCategoryCode() {
+        String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/categoryCode?" +
+                "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
+                "&MobileApp=AppTest" +
+                "&MobileOS=ETC" +
+                "&pageNo=1" +
+                "&numOfRows=10" +
+                "&_type=json";
+
+        return useTourApi(apiUrl);
+    }
 }
