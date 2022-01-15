@@ -16,11 +16,12 @@ import java.net.URLEncoder;
 @Slf4j
 public class TourApiService {
 
-    public String getTourApi(int pageNo,int areaCode,int subAreaCode) {
+    public String getTourApi(String pageNo,int areaCode,int subAreaCode) {
         StringBuilder result = new StringBuilder();
         log.info("pageNo = " + pageNo);
         log.info("areaCode = " + areaCode);
         log.info("subAreaCode = " + subAreaCode);
+        //log.info("contentId = " + contentId);
         if (areaCode == 0 & subAreaCode == 0) {
 
                 String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?" +

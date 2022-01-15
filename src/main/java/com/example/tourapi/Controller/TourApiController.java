@@ -3,6 +3,7 @@ package com.example.tourapi.Controller;
 import com.example.tourapi.Service.TourApiService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
@@ -22,7 +23,7 @@ public class TourApiController {
 
     // 지역기반 검색
     @GetMapping("/areaBasedList")
-    public String getTourApi(@RequestParam int pageNo, int areaCode, int subAreaCode) {
+    public String getTourApi(@RequestParam @Nullable String pageNo, @Nullable int areaCode, @Nullable int subAreaCode) {
         return tourApiService.getTourApi(pageNo,areaCode,subAreaCode);
     }
 
