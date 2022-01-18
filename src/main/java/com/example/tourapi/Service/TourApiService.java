@@ -16,13 +16,27 @@ import java.net.URLEncoder;
 @Slf4j
 public class TourApiService {
 
-    public String getTourApi(String pageNo,int areaCode,int subAreaCode) {
-        StringBuilder result = new StringBuilder();
+    public String getTourApi(int pageNo,int areaCode,int subAreaCode, int contentId) {
+
         log.info("pageNo = " + pageNo);
         log.info("areaCode = " + areaCode);
         log.info("subAreaCode = " + subAreaCode);
-        //log.info("contentId = " + contentId);
-        if (areaCode == 0 & subAreaCode == 0) {
+        log.info("contentId = " + contentId);
+        if (contentId != 0 & areaCode == 0 & subAreaCode == 0 ){
+            String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?" +
+                    "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
+                    "&pageNo=" + pageNo +
+                    "&numOfRows=9" +
+                    "&MobileApp=AppTest" +
+                    "&MobileOS=ETC" +
+                    "&arrange=A" +
+                    "&contentTypeId=" + contentId +
+                    "&listYN=Y" +
+                    "&sponsor1telYN=Y" +
+                    "&_type=json";
+
+            return useTourApi(apiUrl);
+        }else if (contentId == 0 & areaCode == 0 & subAreaCode == 0) {
 
                 String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?" +
                         "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
@@ -31,7 +45,6 @@ public class TourApiService {
                         "&MobileApp=AppTest" +
                         "&MobileOS=ETC" +
                         "&arrange=A" +
-                        "&contentTypeld=12" +
                         "&listYN=Y" +
                         "&sponsor1telYN=Y" +
                         "&_type=json";

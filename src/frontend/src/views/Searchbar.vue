@@ -1,49 +1,47 @@
 <template>
-  <v-app>
-    <v-container>
-      <v-row
-        no-gutters
-        outline
+  <v-container>
+    <v-row
+      no-gutters
+      outline
+    >
+      <v-col
+        v-for="(category, index) in categories"
+        :key="index"
+        align="center"
       >
-        <v-col
-          v-for="(category, index) in categories"
-          :key="index"
-          align="center"
-        >
-          <v-card>
-            {{ category.type }}
-          </v-card>
-        </v-col>
-      </v-row>
+        <v-card>
+          {{ category.type }}
+        </v-card>
+      </v-col>
+    </v-row>
 
-      <v-row>
-        <v-col>
-          <v-select
-            v-model="areaCode"
-            :items="area"
-            label="시"
-            item-text="name"
-            item-value="code"
-            return-object
-            @change="getSubAreaCode()"
-          />
-        </v-col>
-        <v-col>
-          <v-select
-            v-model="subAreaCode"
-            :items="subarea"
-            label="군"
-            item-text="name"
-            item-value="code"
-            return-object
-          />
-        </v-col>
-        <v-btn @click="searchEvent(areaCode.code,subAreaCode.code)">
-          검색
-        </v-btn>
-      </v-row>
-    </v-container>
-  </v-app>
+    <v-row>
+      <v-col>
+        <v-select
+          v-model="areaCode"
+          :items="area"
+          label="시"
+          item-text="name"
+          item-value="code"
+          return-object
+          @change="getSubAreaCode()"
+        />
+      </v-col>
+      <v-col>
+        <v-select
+          v-model="subAreaCode"
+          :items="subarea"
+          label="군"
+          item-text="name"
+          item-value="code"
+          return-object
+        />
+      </v-col>
+      <v-btn @click="searchEvent(areaCode.code,subAreaCode.code)">
+        검색
+      </v-btn>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -71,6 +69,7 @@ export default {
   },
   mounted(){
     this.getAreaCode();
+    console.log(this.$props.send)
   },
 
   methods: {
@@ -97,7 +96,7 @@ export default {
           })
     },
     searchEvent(areaCode,subAreaCode){
-      this.$router.push({path:"./areatourlist", query:{areaCode,subAreaCode}});
+      this.$router.push({path:"./areatourlist", query:{areaCode,subAreaCode,contentId}});
     },
 
     }

@@ -23,8 +23,8 @@ public class TourApiController {
 
     // 지역기반 검색
     @GetMapping("/areaBasedList")
-    public String getTourApi(@RequestParam @Nullable String pageNo, @Nullable int areaCode, @Nullable int subAreaCode) {
-        return tourApiService.getTourApi(pageNo,areaCode,subAreaCode);
+    public String getTourApi(@RequestParam int pageNo, int areaCode, int subAreaCode, int contentId) {
+        return tourApiService.getTourApi(pageNo,areaCode,subAreaCode, contentId);
     }
 
     // 지역코드 정보 조회

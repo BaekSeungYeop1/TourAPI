@@ -21,7 +21,17 @@
     <v-navigation-drawer
       v-model="drawer"
       app
+      dark
+      :src="require('@/assets/sidebar.jpg')"
     >
+      <template
+        #img="props"
+      >
+        <v-img
+          :gradient="gradient"
+          v-bind="props"
+        />
+      </template>
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="text-h6">
@@ -43,7 +53,9 @@
           v-for="category in categories"
           :key="category.type"
           link
-          :to="category.to"
+          :to="{name : category.to, query:{ contentId : category.contentid, areaCode: 0, subAreaCode: 0}}"
+          active-class="primary"
+          class="py-1"
         >
           <v-list-item-icon>
             <v-icon>{{ category.icon }}</v-icon>
@@ -55,7 +67,6 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-
     <v-main>
       <v-container fluid>
         <router-view />
@@ -75,24 +86,19 @@ export default {
 
   data: () => ({
     searchKeyword: "",
+
     drawer : false,
+    gradient: 'rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)',
     categories : [
-       {type : "관광지" , contentid: "12", icon: 'mdi-image', to: '/'},
-       {type : "문화시설" , contentid: "14", icon: 'mdi-image', to: '/'},
-       {type : "행사/축제" , contentid: "15", icon: 'mdi-image', to: '/'},
-       {type : "여행코스" , contentid: "25", icon: 'mdi-image', to: '/'},
-       {type : "레포츠" , contentid: "28", icon: 'mdi-image', to: '/'},
-       {type : "숙박" , contentid: "32", icon: 'mdi-image', to: '/'},
-       {type : "쇼핑" , contentid: "38", icon: 'mdi-image', to: '/'},
-       {type : "음식점" , contentid: "39", icon: 'mdi-image', to: '/'},
+       {type : "관광지" , contentid: "12", icon: 'mdi-image', to: 'Travel'},
+       {type : "문화시설" , contentid: "14", icon: 'mdi-image', to: 'Culture'},
+       {type : "행사/축제" , contentid: "15", icon: 'mdi-image', to: 'Festival'},
+       {type : "여행코스" , contentid: "25", icon: 'mdi-image', to: 'Travelcourse'},
+       {type : "레포츠" , contentid: "28", icon: 'mdi-image', to: 'Leports'},
+       {type : "숙박" , contentid: "32", icon: 'mdi-image', to: 'Accommodation'},
+       {type : "쇼핑" , contentid: "38", icon: 'mdi-image', to: 'Shopping'},
+       {type : "음식점" , contentid: "39", icon: 'mdi-image', to: 'Food'},
      ],
-    items: [
-      { title: 'Dashboard', icon: 'mdi-view-dashboard', to: '/' },
-      { title: 'Grid System', icon: 'mdi-image', to: '/grid-system' },
-      { title: 'Grid List Page', icon: 'mdi-image', to: '/grid-list-page' },
-      { title: 'Breakpoints', icon: 'mdi-image', to: '/breakpoints'},
-      { title: 'Typography', icon: 'mdi-image', to: '/typography'},
-    ],
     right: null,
   }),
   methods: {
@@ -100,7 +106,7 @@ export default {
       let keyword = this.searchKeyword
       console.log(keyword)
       this.$router.push({path:"./KeywordTourlist",query:{keyword}});
-    }
+    },
   }
 };
 </script>

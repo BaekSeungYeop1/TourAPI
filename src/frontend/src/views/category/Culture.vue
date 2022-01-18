@@ -67,6 +67,9 @@
 
 
 export default {
+  components:{
+
+  },
   data: () => ({
     tours:[],             // 관광지 정보
     pageNo: 1,            // 페이징하기위한 페이지 번호
