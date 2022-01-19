@@ -1,3 +1,4 @@
+/* eslint-disable vue/attribute-hyphenation */
 <template>
   <v-app>
     <v-app-bar
@@ -56,6 +57,7 @@
           :to="{name : category.to, query:{ contentId : category.contentid, areaCode: 0, subAreaCode: 0}}"
           active-class="primary"
           class="py-1"
+          @click="clickEvent(category.to,category.contentid)"
         >
           <v-list-item-icon>
             <v-icon>{{ category.icon }}</v-icon>
@@ -69,24 +71,28 @@
     </v-navigation-drawer>
     <v-main>
       <v-container fluid>
-        <router-view />
+        <Searchbar
+          :childurl="clickedUrl"
+          :childcontentid="clickedContentId"
+        />
+        <router-view :key="$route.fullPath" />
       </v-container>
     </v-main>
   </v-app>
 </template>
 
 <script>
+import Searchbar from './views/Searchbar.vue'
 
 export default {
   name: 'App',
 
   components: {
-
+    Searchbar
   },
 
   data: () => ({
     searchKeyword: "",
-
     drawer : false,
     gradient: 'rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)',
     categories : [
@@ -99,6 +105,8 @@ export default {
        {type : "쇼핑" , contentid: "38", icon: 'mdi-image', to: 'Shopping'},
        {type : "음식점" , contentid: "39", icon: 'mdi-image', to: 'Food'},
      ],
+     clickedUrl : "",
+     clickedContentId : "",
     right: null,
   }),
   methods: {
@@ -107,6 +115,12 @@ export default {
       console.log(keyword)
       this.$router.push({path:"./KeywordTourlist",query:{keyword}});
     },
+    clickEvent(to,contentid){
+      this.clickedUrl = to;
+      this.clickedContentId = contentid
+      console.log("clickedUrl=" + to);
+      console.log("clickedContentId=" + contentid)
+    }
   }
 };
 </script>

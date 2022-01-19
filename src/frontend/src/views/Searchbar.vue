@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <div>{{ childurl }} {{ childcontentid }}</div>
     <v-row
       no-gutters
       outline
@@ -45,8 +46,12 @@
 </template>
 
 <script>
+
 export default {
+  props:["childurl","childcontentid"],
   data: () => ({
+    preurl: "",
+    pageIndex: 0,
     areaCode: {code: "0", name: "0", rnum: "0"},
     area:[],
     subarea:[],
@@ -69,7 +74,6 @@ export default {
   },
   mounted(){
     this.getAreaCode();
-    console.log(this.$props.send)
   },
 
   methods: {
@@ -96,7 +100,10 @@ export default {
           })
     },
     searchEvent(areaCode,subAreaCode){
-      this.$router.push({path:"./areatourlist", query:{areaCode,subAreaCode,contentId}});
+      let category = this.childurl;
+      let contentId = this.childcontentid;
+      this.$router.push({name: category, query:{areaCode,subAreaCode,contentId}});
+
     },
 
     }
