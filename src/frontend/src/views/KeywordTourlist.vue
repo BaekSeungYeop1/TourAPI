@@ -8,7 +8,9 @@
           cols="12"
           sm="4"
         >
-          <v-card>
+          <v-card
+            @click="clickEvent(tour.contentid)"
+          >
             <v-img
               aspect-ratio="2"
               :src="tour.firstimage"
@@ -19,8 +21,12 @@
               />
             </v-img>
             <v-card-text>
-              <div>{{ tour.title }}</div>
-              <div>{{ tour.addr1 }}</div>
+              <div class="text-h6 pa-2 font-weight-black">
+                {{ tour.title }}
+              </div>
+              <div class="pa-2">
+                {{ tour.addr1 }}
+              </div>
             </v-card-text>
             <v-divider />
             <v-card-actions>
@@ -62,7 +68,7 @@ export default {
   data: () => ({
     tours:[],
     pageNo: 1,
-    numOfRows: 10,
+    numOfRows: 9,
     paging:[],
     selectedArea: undefined
   }),
@@ -106,6 +112,11 @@ export default {
 
 
       console.log(this.pageNo)
+    },
+    clickEvent(contentid){
+      //let commonInfo = this.tour.contentid;
+      console.log(contentid);
+      this.$router.push({path:"./commoninfo1",query:{contentid}});
     },
   }
 

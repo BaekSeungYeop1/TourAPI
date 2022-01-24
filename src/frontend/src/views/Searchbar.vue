@@ -5,7 +5,7 @@
         <v-select
           v-model="areaCode"
           :items="area"
-          label="시"
+          label="지역"
           item-text="name"
           item-value="code"
           return-object
@@ -16,15 +16,17 @@
         <v-select
           v-model="subAreaCode"
           :items="subarea"
-          label="군"
+          label="시군구"
           item-text="name"
           item-value="code"
           return-object
         />
       </v-col>
-      <v-btn @click="searchEvent(areaCode.code,subAreaCode.code)">
-        검색
-      </v-btn>
+      <v-col>
+        <v-btn @click="searchEvent(areaCode.code,subAreaCode.code)">
+          검색
+        </v-btn>
+      </v-col>
     </v-row>
   </v-container>
 </template>
