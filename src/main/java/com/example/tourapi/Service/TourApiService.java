@@ -161,6 +161,44 @@ public class TourApiService {
 
     }
 
+    public String getCategoryCode() {
+        String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/categoryCode?" +
+                "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
+                "&MobileApp=AppTest" +
+                "&MobileOS=ETC" +
+                "&pageNo=1" +
+                "&numOfRows=10" +
+                "&_type=json";
+
+        return useTourApi(apiUrl);
+    }
+
+    public String getDetailImage(int contentId) {
+        log.info(String.valueOf(contentId));
+        String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage?" +
+                "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
+                "&numOfRows=10" +
+                "&pageNo=1" +
+                "&MobileOS=ETC" +
+                "&MobileApp=AppTest" +
+                "&contentId=" + contentId +
+                "&imageYN=Y" +
+                "&subImageYN=Y" +
+                "&_type=json";
+
+        return useTourApi(apiUrl);
+
+        // http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage?
+        // serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D
+        // &numOfRows=10
+        // &pageNo=1
+        // &MobileOS=ETC
+        // &MobileApp=AppTest
+        // &contentId=1095732
+        // &imageYN=Y
+        // &subImageYN=Y
+    }
+
     private String useTourApi(String apiUrl) {
         StringBuilder result = new StringBuilder();
         try {
@@ -182,17 +220,5 @@ public class TourApiService {
         }
         return result.toString();
 
-    }
-
-    public String getCategoryCode() {
-        String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/categoryCode?" +
-                "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
-                "&MobileApp=AppTest" +
-                "&MobileOS=ETC" +
-                "&pageNo=1" +
-                "&numOfRows=10" +
-                "&_type=json";
-
-        return useTourApi(apiUrl);
     }
 }

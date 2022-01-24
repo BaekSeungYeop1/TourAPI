@@ -58,8 +58,12 @@ public class TourApiController {
         return tourApiService.getCommonInfo(contentId);
     }
 
+    // 이미지정보 조회
+    @GetMapping("/detailImage")
+    public String getDetailImage(@RequestParam int contentId) { return tourApiService.getDetailImage(contentId); }
 
-    // 상세정보
+
+   // 상세정보
     @GetMapping("/detailInfo")
     public String ApiTest1(@RequestParam int contentId, int contentTypeId) {
         StringBuilder result = new StringBuilder();
