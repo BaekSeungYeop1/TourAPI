@@ -72,6 +72,7 @@
     <v-main>
       <v-container fluid>
         <Searchbar
+          v-if="disableRouter.includes($route.name)"
           :childurl="clickedUrl"
           :childcontentid="clickedContentId"
         />
@@ -94,6 +95,7 @@ export default {
   data: () => ({
     searchKeyword: "",
     drawer : false,
+    disableRouter : ["Travel","Culture","Festival","Travelcourse","Leports","Accommodation","Shopping","Food"],
     gradient: 'rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)',
     categories : [
        {type : "관광지" , contentid: "12", icon: 'mdi-image', to: 'Travel'},

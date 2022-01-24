@@ -1,21 +1,5 @@
 <template>
   <v-container>
-    <div>{{ childurl }} {{ childcontentid }}</div>
-    <v-row
-      no-gutters
-      outline
-    >
-      <v-col
-        v-for="(category, index) in categories"
-        :key="index"
-        align="center"
-      >
-        <v-card>
-          {{ category.type }}
-        </v-card>
-      </v-col>
-    </v-row>
-
     <v-row>
       <v-col>
         <v-select
