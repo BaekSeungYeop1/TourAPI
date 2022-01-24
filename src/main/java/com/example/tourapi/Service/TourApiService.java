@@ -22,7 +22,25 @@ public class TourApiService {
         log.info("areaCode = " + areaCode);
         log.info("subAreaCode = " + subAreaCode);
         log.info("contentId = " + contentId);
-        if (contentId != 0 & areaCode == 0 & subAreaCode == 0 ){
+
+        // 관광타입 x 지역코드 x 시군구코드 x
+        if (contentId == 0 & areaCode == 0 & subAreaCode == 0) {
+            String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?" +
+                    "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
+                    "&pageNo=" + pageNo +
+                    "&numOfRows=9" +
+                    "&MobileApp=AppTest" +
+                    "&MobileOS=ETC" +
+                    "&arrange=A" +
+                    "&listYN=Y" +
+                    "&_type=json";
+
+            return useTourApi(apiUrl);
+
+        }
+        // 관광타입 o 지역코드 x 시군구코드 x
+        else if (contentId != 0 & areaCode == 0 & subAreaCode == 0) {
+
             String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?" +
                     "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
                     "&pageNo=" + pageNo +
@@ -32,42 +50,13 @@ public class TourApiService {
                     "&arrange=A" +
                     "&contentTypeId=" + contentId +
                     "&listYN=Y" +
-                    "&sponsor1telYN=Y" +
-                    "&_type=json";
-
-            return useTourApi(apiUrl);
-        }else if (contentId == 0 & areaCode == 0 & subAreaCode == 0) {
-
-                String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?" +
-                        "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
-                        "&pageNo=" + pageNo +
-                        "&numOfRows=9" +
-                        "&MobileApp=AppTest" +
-                        "&MobileOS=ETC" +
-                        "&arrange=A" +
-                        "&listYN=Y" +
-                        "&sponsor1telYN=Y" +
-                        "&_type=json";
-
-                return useTourApi(apiUrl);
-
-        }else if(areaCode != 0 & subAreaCode == 0) {
-            String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?" +
-                    "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
-                    "&pageNo=" + pageNo +
-                    "&numOfRows=9" +
-                    "&MobileApp=AppTest" +
-                    "&MobileOS=ETC" +
-                    "&arrange=A" +
-                    "&contentTypeld=12" +
-                    "&areaCode=" + areaCode +
-                    "&listYN=Y" +
-                    "&sponsor1telYN=Y" +
                     "&_type=json";
 
             return useTourApi(apiUrl);
 
         }
+        // 관광타입 o 지역코드 o 시군구코드 x
+        else if (contentId != 0 & areaCode != 0 & subAreaCode == 0) {
             String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?" +
                     "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
                     "&pageNo=" + pageNo +
@@ -75,14 +64,34 @@ public class TourApiService {
                     "&MobileApp=AppTest" +
                     "&MobileOS=ETC" +
                     "&arrange=A" +
-                    "&contentTypeld=12" +
+                    "&contentTypeId=" + contentId +
                     "&areaCode=" + areaCode +
-                    "&sigunguCode=" +subAreaCode +
                     "&listYN=Y" +
-                    "&sponsor1telYN=Y" +
                     "&_type=json";
 
             return useTourApi(apiUrl);
+
+        }
+        // 관광타입 o 지역코드 o 시군구코드 o
+        else if (contentId != 0 & areaCode != 0 & subAreaCode != 0) {
+            String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?" +
+                    "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
+                    "&pageNo=" + pageNo +
+                    "&numOfRows=9" +
+                    "&MobileApp=AppTest" +
+                    "&MobileOS=ETC" +
+                    "&arrange=A" +
+                    "&contentTypeId=" + contentId +
+                    "&areaCode=" + areaCode +
+                    "&sigunguCode=" + subAreaCode +
+                    "&listYN=Y" +
+                    "&_type=json";
+
+            return useTourApi(apiUrl);
+
+        }
+
+        return null;
     }
 
 
