@@ -16,6 +16,29 @@ import java.net.URLEncoder;
 @Slf4j
 public class TourApiService {
 
+    private String useTourApi(String apiUrl) {
+        StringBuilder result = new StringBuilder();
+        try {
+
+            URL url = new URL(apiUrl);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("GET");
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
+
+            String returnLine;
+
+            while((returnLine = bufferedReader.readLine()) != null) {
+                result.append(returnLine + "\n");
+            }
+            urlConnection.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result.toString();
+
+    }
+
     public String getTourApi(int pageNo,int areaCode,int subAreaCode, int contentId) {
 
         log.info("pageNo = " + pageNo);
@@ -188,37 +211,35 @@ public class TourApiService {
 
         return useTourApi(apiUrl);
 
-        // http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage?
-        // serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D
-        // &numOfRows=10
-        // &pageNo=1
-        // &MobileOS=ETC
-        // &MobileApp=AppTest
-        // &contentId=1095732
-        // &imageYN=Y
-        // &subImageYN=Y
     }
 
-    private String useTourApi(String apiUrl) {
-        StringBuilder result = new StringBuilder();
-        try {
 
-            URL url = new URL(apiUrl);
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestMethod("GET");
+    public String getDetailInfo(int contentId, int contentTypeId) {
+        String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailInfo?" +
+                "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
+                "&numOfRows=10" +
+                "&pageNo=1" +
+                "&MobileOS=ETC" +
+                "&MobileApp=AppTest" +
+                "&contentId=" + contentId +
+                "&contentTypeId=" + contentTypeId +
+                "&_type=json";
 
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
+        return useTourApi(apiUrl);
+    }
 
-            String returnLine;
+    public String getDetailIntro(int contentId, int contentTypeId) {
+        String apiUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailIntro?" +
+                "serviceKey=SttmOHJrTnbL%2BYGjAeOeUNscrx%2BJsXNqXqnqgRVVZA8pkTaoOaravKjuPByElQKhnXijl0X6yOEbxKV2rPb6iw%3D%3D" +
+                "&numOfRows=10" +
+                "&pageNo=1" +
+                "&MobileOS=ETC" +
+                "&MobileApp=AppTest" +
+                "&contentId=" + contentId +
+                "&contentTypeId=" + contentTypeId +
+                "&_type=json";
 
-            while((returnLine = bufferedReader.readLine()) != null) {
-                result.append(returnLine + "\n");
-            }
-            urlConnection.disconnect();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result.toString();
+        return useTourApi(apiUrl);
 
     }
 }
