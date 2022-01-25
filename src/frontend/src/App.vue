@@ -11,6 +11,8 @@
       <v-spacer />
       <v-text-field
         v-model="searchKeyword"
+        label="검색어를 입력하세요"
+        placeholder="검색어를 입력하세요"
         append-icon="mdi-magnify"
         flat
         hide-details

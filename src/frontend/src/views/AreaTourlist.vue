@@ -9,7 +9,7 @@
           sm="4"
         >
           <v-card
-            @click="clickEvent(tour.contentid)"
+            @click="clickEvent(tour.contentid,tour.contenttypeid)"
           >
             <v-img
               aspect-ratio="2"
@@ -118,10 +118,11 @@ export default {
 
       console.log(this.pageNo)
     },
-    clickEvent(contentid){
+    clickEvent(contentid,contenttypeid){
       //let commonInfo = this.tour.contentid;
-      console.log(contentid);
-      this.$router.push({path:"./commoninfo1",query:{contentid}});
+      console.log("contentid = " + contentid);
+      console.log("contenttypeid =" + contenttypeid);
+      this.$router.push({path:"./commoninfo1",query:{contentid,contenttypeid}});
     },
   }
 

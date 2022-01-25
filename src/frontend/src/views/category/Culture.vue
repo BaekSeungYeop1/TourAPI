@@ -9,7 +9,7 @@
           sm="4"
         >
           <v-card
-            @click="clickEvent(tour.contentid)"
+            @click="clickEvent(tour.contentid,tour.contenttypeid,tour.mapx,tour.mapy)"
           >
             <v-img
               aspect-ratio="2"
@@ -67,9 +67,6 @@
 
 
 export default {
-  components:{
-
-  },
   data: () => ({
     tours:[],             // 관광지 정보
     pageNo: 1,            // 페이징하기위한 페이지 번호
@@ -121,10 +118,10 @@ export default {
 
       console.log(this.pageNo)
     },
-    clickEvent(contentid){
-      //let commonInfo = this.tour.contentid;
-      console.log(contentid);
-      this.$router.push({path:"./commoninfo1",query:{contentid}});
+    clickEvent(contentid,contenttypeid,mapx,mapy){
+      console.log("contentid = " + contentid);
+      console.log("contenttypeid =" + contenttypeid);
+      this.$router.push({path:"./commoninfo1",query:{contentid,contenttypeid,mapx,mapy}});
     },
   }
 
