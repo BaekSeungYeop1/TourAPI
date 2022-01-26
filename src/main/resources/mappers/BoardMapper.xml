@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ac.daegu.springbootapi.board.model.BoardDAO">
+
+<select id="getBoardList" resultType="com.example.tourapi.board.model.BoardDTO">
+    SELECT * FROM Board
+    WHERE isDel = "N"
+</select>
+    <insert id="insertBoard" parameterType="com.example.tourapi.board.model.BoardDTO">
+        insert into board (author, subject, content, writeDate, writeTime, readCount, commentCount, password, replyRootId, depth, orderNum)
+        values (#{author}, #{subject}, #{content}, #{writeDate}, #{writeTime}, 0, 0, #{password}, 0, 0, 0)
+    </insert>
+
+    <update id="putBoard" parameterType="com.example.tourapi.board.model.BoardDTO">
+        UPDATE BOARD
+        SET author=#{author},
+            content=#{content},
+            subject=#{subject},
+            writeDate=#{writeDate},
+            writeTime=#{writeTime}
+        WHERE id=#{id}
+    </update>
+
+    <select id="getBoardById" parameterType="int" resultType="com.example.tourapi.board.model.BoardDTO">
+        SELECT * from Board
+        WHERE id = #{id}
+    </select>
+
+    <!-- 내가 만든 글삭제 -->
+    <delete id="deleteBoard" parameterType="com.example.tourapi.board.model.BoardDTO">
+        delete from BOARD where id = #{id}
+    </delete>
+
+    <!-- 강사님이 만든 글 삭제 -->
+    <update id="updateIsDelBoardById" parameterType="int">
+        UPDATE BOARD
+        SET isDEL = 'Y'
+        WHERE id = #{id}
+    </update>
+
+</mapper>

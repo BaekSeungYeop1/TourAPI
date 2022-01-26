@@ -1,4 +1,4 @@
-package com.example.tourapi.Service;
+package com.example.tourapi.tour.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,16 +1,11 @@
-package com.example.tourapi.Controller;
+package com.example.tourapi.tour.Controller;
 
-import com.example.tourapi.Service.TourApiService;
+import com.example.tourapi.tour.Service.TourApiService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 @RestController
 @RequiredArgsConstructor

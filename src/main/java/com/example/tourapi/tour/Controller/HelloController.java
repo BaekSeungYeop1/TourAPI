@@ -1,4 +1,4 @@
-package com.example.tourapi.Controller;
+package com.example.tourapi.tour.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
