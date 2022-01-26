@@ -31,7 +31,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                     Arrays.asList(
                             "/api/member",
                             "/authenticate",
-                            "/apitest/*"
+                            "/apitest/*",
+                            "/boardjpa/*"
                     ));
 
     public JwtRequestFilter(JwtUserDetailsService jwtUserDetailsService, JwtTokenUtil jwtTokenUtil) {

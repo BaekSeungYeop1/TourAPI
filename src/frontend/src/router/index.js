@@ -16,6 +16,7 @@ import Leports from '@/views/category/Leports.vue'
 import Accommodation from '@/views/category/Accommodation.vue'
 import Shopping from '@/views/category/Shopping.vue'
 import Food from '@/views/category/Food.vue'
+import QnA from '@/views/QnA.vue'
 
 Vue.use(VueRouter)
 
@@ -100,6 +101,11 @@ const routes = [
     path: '/food',
     name: 'Food',
     component: Food
+  },
+  {
+    path: '/qna',
+    name: 'QnA',
+    component: QnA
   },
 ]
 

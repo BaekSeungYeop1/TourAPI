@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -24,6 +25,7 @@ public class BoardJpaService {
     public final BoardRepository boardRepository;
     public final CommentDAO commentDAO;
 
+    /*
     public Page<Board> getBoardList(int page, int size) {
         // 숙제 2 : jpa queryMethod를 수정하여 isDel이 "N"인 데이터row들만 나오도록 수정
         PageRequest pageRequest = PageRequest.of(page, size);
@@ -33,6 +35,7 @@ public class BoardJpaService {
         // 그외 쿼리메소드로 작성하여 바로 적용.
         return boardRepository.findBoardsByIsDelOrderByReplyRootIdDescOrderNumAsc("N", pageRequest);
     }
+    */
 
     public Board getBoardById(Integer id) {
         return boardRepository.findBoardById(id);
@@ -177,5 +180,9 @@ public class BoardJpaService {
         }
         builder.append(target);
         return builder.toString();
+    }
+
+    public List<Board> getBoardList() {
+        return boardRepository.findBoardsByIsDel("N");
     }
 }

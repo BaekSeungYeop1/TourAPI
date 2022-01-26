@@ -9,6 +9,14 @@
       <v-app-bar-nav-icon @click="drawer = !drawer" />
 
       <v-spacer />
+      <v-btn
+        flat
+        color="primary"
+        style="margin-right:5px;"
+        @click="PageLink()"
+      >
+        <span>Q&A</span>
+      </v-btn>
       <v-text-field
         v-model="searchKeyword"
         label="검색어를 입력하세요"
@@ -111,7 +119,8 @@ export default {
      ],
      clickedUrl : "",
      clickedContentId : "",
-    right: null,
+     right: null,
+
   }),
   methods: {
     search(){
@@ -124,6 +133,9 @@ export default {
       this.clickedContentId = contentid
       console.log("clickedUrl=" + to);
       console.log("clickedContentId=" + contentid)
+    },
+    PageLink(){
+       this.$router.push({path:"./qna"});
     }
   }
 };

@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @Slf4j
@@ -17,6 +19,16 @@ public class BoardJpaController {
 
     public final BoardJpaService boardJpaService;
 
+
+    @GetMapping(value = "/")
+    public ApiResponse<BoardDTO> getBoardList(){
+        List<Board> list = boardJpaService.getBoardList();
+        return new ApiResponse(true, list);
+    }
+
+
+
+    /*
     @GetMapping(value = "/")
     public ApiResponse<BoardDTO> getBoardList(@RequestParam int page, @RequestParam int size){
         Page<Board> list = boardJpaService.getBoardList(page, size);
@@ -62,5 +74,7 @@ public class BoardJpaController {
     public ApiResponse<BoardDTO> postBoardReplyContent(@RequestBody BoardDTO boardDTO){
         return boardJpaService.postReply(boardDTO);
     }
+
+     */
 }
 
