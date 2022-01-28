@@ -19,7 +19,7 @@ import Shopping from '@/views/category/Shopping.vue'
 import Food from '@/views/category/Food.vue'
 import QnA from '@/views/QnA.vue'
 import Board from '@/views/Board.vue'
-
+import BoardEdit from '@/views/BoardEdit.vue'
 Vue.use(VueRouter)
 
 
@@ -118,6 +118,11 @@ const routes = [
     path: '/board',
     name: 'Board',
     component: Board
+  },
+  {
+    path: '/boardedit',
+    name: 'BoardEdit',
+    component: BoardEdit
   },
 ]
 
