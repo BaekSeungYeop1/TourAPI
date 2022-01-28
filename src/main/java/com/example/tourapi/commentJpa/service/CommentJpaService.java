@@ -20,9 +20,9 @@ public class CommentJpaService {
     public final CommentRepository commentRepository;
     public final BoardRepository boardRepository;
 
-    @Transactional
+    /*@Transactional
     public CommentDTO postComment(CommentDTO commentDTO) {
-        /* DBMS Comment 테이블에 설정되어 있는 제약조건 삭제 후 테스트 해 볼것. */
+        *//* DBMS Comment 테이블에 설정되어 있는 제약조건 삭제 후 테스트 해 볼것. *//*
 //        댓글달기 API (POST /commentJpa/) 호출 하면
 //        Comment 테이블에 데이터 INSERT
         Comment c = Comment.builder()
@@ -44,5 +44,5 @@ public class CommentJpaService {
         board.setCommentCount(board.getCommentCount() + 1);
         boardRepository.save(board);
         return commentDTO;
-    }
+    }*/
 }

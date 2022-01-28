@@ -1,42 +1,73 @@
 <template>
   <v-app>
-    <v-container>
-      <v-row>
-        <v-col>
-          <v-data-table
-            :headers="headers"
-            :items="boardList"
-            :loading="loading"
-          >
-            <template
-              slot="items"
-              slot-scope="props"
-            >
-              <td :class="headers[0].class">
-                {{ props.item.id }}
-              </td>
-              <td :class="headers[1].class">
-                {{ props.item.subject }}
-              </td>
-              <td :class="headers[2].class">
-                {{ props.item.author }}
-              </td>
-              <td :class="headers[3].class">
-                {{ props.item.writeDate }}
-              </td>
-              <td :class="headers[4].class">
-                {{ props.item.readCount }}
-              </td>
-            </template>
-          </v-data-table>
-        </v-col>
-      </v-row>
-    </v-container>
+    <v-card>
+      <v-card-title>
+        Q&A
+        <v-spacer />
+
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        />
+      </v-card-title>
+
+      <v-data-table
+        :headers="headers"
+        :items="boardList"
+        :loading="loading"
+        :search="search"
+      >
+        <template
+          v-slot:item="{item}"
+        >
+          <tr @click="clickRow(item.id)">
+            <td :class="headers[0].class">
+              {{ item.id }}
+            </td>
+            <td :class="headers[1].class">
+              {{ item.subject }}
+            </td>
+            <td :class="headers[2].class">
+              {{ item.author }}
+            </td>
+            <td :class="headers[3].class">
+              {{ item.writeDate }}
+            </td>
+            <td :class="headers[4].class">
+              {{ item.readCount }}
+            </td>
+          </tr>
+        </template>
+
+        <v-alert
+          slot="no-results"
+          :value="true"
+          color="error"
+          icon="warning"
+        >
+          입력하신 검색어 "{{ search }}"를 찾지 못했습니다.
+        </v-alert>
+      </v-data-table>
+      <v-card-title>
+        <v-spacer />
+        <v-btn
+          depressed
+          small
+          class="mx-auto gray"
+        >
+          <v-icon> mdi-border-color</v-icon>
+        </v-btn>
+      </v-card-title>
+    </v-card>
   </v-app>
 </template>
 <script>
 export default {
   data: () => ({
+    search: '',
     boardList: [],
     loading: false,
     headers: [
@@ -61,6 +92,9 @@ export default {
             console.log(e);
           })
     },
+    clickRow(id){
+      this.$router.push({path:'./board',query:{id}})
+    }
   }
 }
 </script>

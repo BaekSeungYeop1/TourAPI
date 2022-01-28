@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
+import Footer from '@/views/Footer.vue'
 import About from '@/views/About.vue'
 import AreaTourlist from '@/views/AreaTourlist.vue'
 import KeywordTourlist from '@/views/KeywordTourlist.vue'
@@ -17,6 +18,7 @@ import Accommodation from '@/views/category/Accommodation.vue'
 import Shopping from '@/views/category/Shopping.vue'
 import Food from '@/views/category/Food.vue'
 import QnA from '@/views/QnA.vue'
+import Board from '@/views/Board.vue'
 
 Vue.use(VueRouter)
 
@@ -26,6 +28,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/footer',
+    name: 'Footer',
+    component: Footer
   },
   {
     path: '/about',
@@ -106,6 +113,11 @@ const routes = [
     path: '/qna',
     name: 'QnA',
     component: QnA
+  },
+  {
+    path: '/board',
+    name: 'Board',
+    component: Board
   },
 ]
 

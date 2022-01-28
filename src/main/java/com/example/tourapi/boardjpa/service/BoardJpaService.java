@@ -25,8 +25,19 @@ public class BoardJpaService {
     public final BoardRepository boardRepository;
     public final CommentDAO commentDAO;
 
-    /*
-    public Page<Board> getBoardList(int page, int size) {
+    public List<Board> getBoardList() {
+        return boardRepository.findBoardsByIsDel("N");
+    }
+
+    public Board getBoardById(Integer id) {
+        return boardRepository.findBoardByIdAndIsDel(id,"N");
+    }
+
+
+
+
+
+   /* public Page<Board> getBoardList(int page, int size) {
         // 숙제 2 : jpa queryMethod를 수정하여 isDel이 "N"인 데이터row들만 나오도록 수정
         PageRequest pageRequest = PageRequest.of(page, size);
         // 페이지네이션 + 정렬조건 + 다른 개발자 부여 조건 하여 List하는 여러 방법들..
@@ -35,7 +46,7 @@ public class BoardJpaService {
         // 그외 쿼리메소드로 작성하여 바로 적용.
         return boardRepository.findBoardsByIsDelOrderByReplyRootIdDescOrderNumAsc("N", pageRequest);
     }
-    */
+
 
     public Board getBoardById(Integer id) {
         return boardRepository.findBoardById(id);
@@ -114,14 +125,14 @@ public class BoardJpaService {
 
     @Transactional
     public ApiResponse<BoardDTO> postReply(BoardDTO dto) {
-        /* JPQL TEST 겸 원글 불러오기 */
+         JPQL TEST 겸 원글 불러오기
         Board b = boardRepository.selectBoard(dto.getReplyRootId());
         if(b == null){
             return new ApiResponse(false, "board id " + dto.getReplyRootId() + " is null");
         }
         log.debug(b.toString());
 
-        /* depth와 orderNum을 정하는 로직 START */
+         depth와 orderNum을 정하는 로직 START
         int replyRootId = dto.getReplyRootId();
         int depth = dto.getDepth();
         int orderNum = dto.getOrderNum();
@@ -143,9 +154,9 @@ public class BoardJpaService {
         int newDepth = depth + 1;
         log.debug("newDepth=" + newDepth);
         String newSubject = appendPrefixString("RE : ", depth, dto.getSubject());
-        /* depth와 orderNum을 정하는 로직 END */
+         depth와 orderNum을 정하는 로직 END
 
-        /* 새로운 답글 컨텐츠 추가 */
+         새로운 답글 컨텐츠 추가
         Board newB = Board.builder()
                 .subject(newSubject)
                 .author(dto.getAuthor())
@@ -162,7 +173,7 @@ public class BoardJpaService {
                 .build();
         boardRepository.save(newB);
 
-        /* 추가한 답글 컨텐츠 결과 리턴 */
+         추가한 답글 컨텐츠 결과 리턴
         // JPA를 사용함에 있어 Entity 객체와 DTO객체를 일부러 분리한 이유, Entity <-> DTO의 변환 참고
         // https://dbbymoon.tistory.com/4
         dto.setSubject(newSubject);
@@ -180,9 +191,7 @@ public class BoardJpaService {
         }
         builder.append(target);
         return builder.toString();
-    }
+    }*/
 
-    public List<Board> getBoardList() {
-        return boardRepository.findBoardsByIsDel("N");
-    }
+
 }

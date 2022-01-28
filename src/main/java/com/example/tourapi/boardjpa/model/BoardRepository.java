@@ -11,7 +11,15 @@ import java.util.Optional;
 
 
 public interface BoardRepository extends JpaRepository<Board, Integer> {
-    List<Board> findAll();
+
+    List<Board> findBoardsByIsDel(String isDel);
+
+    Board findBoardByIdAndIsDel(int Id, String isDel);
+
+
+
+
+    /*List<Board> findAll();
 
     Board findBoardById(Integer id);
     Optional<Board> findBoardById(int id);
@@ -41,7 +49,7 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
     // 최고 Id값을 가진 Board 엔터티를 가져옴
     Board findTopByOrderByIdDesc();
 
-    Page<Board> findBoardsByIsDelOrderByReplyRootIdDescOrderNumAsc(String isDel, Pageable pageable);
+    Page<Board> findBoardsByIsDelOrderByReplyRootIdDescOrderNumAsc(String isDel, Pageable pageable);*/
 
-    List<Board> findBoardsByIsDel(String n);
+
 }

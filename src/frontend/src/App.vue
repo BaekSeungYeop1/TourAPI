@@ -3,7 +3,7 @@
   <v-app>
     <v-app-bar
       app
-      color="primary"
+      color="dark"
       dark
     >
       <v-app-bar-nav-icon @click="drawer = !drawer" />
@@ -11,7 +11,7 @@
       <v-spacer />
       <v-btn
         flat
-        color="primary"
+        color="dark"
         style="margin-right:5px;"
         @click="PageLink()"
       >
@@ -87,19 +87,22 @@
           :childcontentid="clickedContentId"
         />
         <router-view :key="$route.fullPath" />
+        <Footer />
       </v-container>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Searchbar from './views/Searchbar.vue'
+import Searchbar from './views/Searchbar.vue';
+import Footer from './views/Footer.vue';
 
 export default {
   name: 'App',
 
   components: {
-    Searchbar
+    Searchbar,
+    Footer,
   },
 
   data: () => ({

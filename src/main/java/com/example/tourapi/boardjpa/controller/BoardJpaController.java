@@ -26,6 +26,12 @@ public class BoardJpaController {
         return new ApiResponse(true, list);
     }
 
+    @GetMapping(value = "/{id}") // PathVariable
+    public ApiResponse<BoardDTO> getBoardById(@PathVariable Integer id){
+        Board data = boardJpaService.getBoardById(id);
+        return new ApiResponse(true, data);
+    }
+
 
 
     /*

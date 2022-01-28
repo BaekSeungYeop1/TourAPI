@@ -18,9 +18,9 @@ public class CommentJpaController {
 
     public final CommentJpaService commentJpaService;
 
-    @PostMapping(value = "/")
+    /*@PostMapping(value = "/")
     public ApiResponse<CommentDTO> postComment(@RequestBody CommentDTO commentDTO) {
         CommentDTO data = commentJpaService.postComment(commentDTO);
         return new ApiResponse(true, data);
-    }
+    }*/
 }
