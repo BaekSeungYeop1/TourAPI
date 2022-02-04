@@ -121,7 +121,7 @@ export default {
     clickEvent(contentid,contenttypeid,mapx,mapy){
       console.log("contentid = " + contentid);
       console.log("contenttypeid =" + contenttypeid);
-      this.$router.push({path:"./commoninfo1",query:{contentid,contenttypeid,mapx,mapy}});
+      this.$router.push({path:"./detailFestival",query:{contentid,contenttypeid,mapx,mapy}});
     },
   }
 

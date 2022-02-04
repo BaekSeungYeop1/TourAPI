@@ -21,6 +21,8 @@ import QnA from '@/views/QnA.vue'
 import Board from '@/views/Board.vue'
 import BoardEdit from '@/views/BoardEdit.vue'
 import BoardUpdate from '@/views/BoardUpdate.vue'
+import DetailCulture from '@/views/category/DetailCulture'
+import DetailFestival from '@/views/category/DetailFestival'
 Vue.use(VueRouter)
 
 
@@ -129,6 +131,16 @@ const routes = [
     path: '/boardupdate',
     name: 'BoardUpdate',
     component: BoardUpdate
+  },
+  {
+    path: '/detailculture',
+    name: 'DetailCulture',
+    component: DetailCulture
+  },
+  {
+    path: '/detailfestival',
+    name: 'DetailFestival',
+    component: DetailFestival
   },
 
 ]
