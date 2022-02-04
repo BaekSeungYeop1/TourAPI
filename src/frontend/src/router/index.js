@@ -20,6 +20,7 @@ import Food from '@/views/category/Food.vue'
 import QnA from '@/views/QnA.vue'
 import Board from '@/views/Board.vue'
 import BoardEdit from '@/views/BoardEdit.vue'
+import BoardUpdate from '@/views/BoardUpdate.vue'
 Vue.use(VueRouter)
 
 
@@ -124,6 +125,12 @@ const routes = [
     name: 'BoardEdit',
     component: BoardEdit
   },
+  {
+    path: '/boardupdate',
+    name: 'BoardUpdate',
+    component: BoardUpdate
+  },
+
 ]
 
 const router = new VueRouter({

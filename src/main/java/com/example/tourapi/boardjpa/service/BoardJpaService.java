@@ -33,6 +33,71 @@ public class BoardJpaService {
         return boardRepository.findBoardByIdAndIsDel(id,"N");
     }
 
+    public Board postBoard(BoardDTO boardDTO) {
+        int newBoardIdValue = this.getNewBoardIdValue(boardRepository);
+        log.debug("newBoardIdValue="+newBoardIdValue);
+        Board postData = Board.builder()
+                .id(newBoardIdValue)
+                .author(boardDTO.getAuthor())
+                .subject(boardDTO.getSubject())
+                .content(boardDTO.getContent())
+                .commentCount(0)
+                .depth(0)
+                .orderNum(0)
+                .isDel("N")
+                .readCount(0)
+                .replyRootId(newBoardIdValue)
+                .writeDate(LocalDate.now())
+                .writeTime(LocalTime.now())
+                .build();
+
+
+        return boardRepository.save(postData);
+    }
+
+    private int getNewBoardIdValue(BoardRepository boardRepository) {
+        int result;
+        Board boardOfMaxId = boardRepository.findTopByOrderByIdDesc();
+        if(boardOfMaxId == null) {
+            result = 1;
+            log.debug("no board data, maxId is 1");
+        } else {
+            result = boardOfMaxId.getId() + 1;
+            log.debug("maxIdFromBoard="+boardOfMaxId.getId());
+        }
+        log.debug("newBoardIdValue="+result);
+        return result;
+    }
+
+    public Board putBoard(int id, BoardDTO boardDTO) {
+        Optional<Board> boardData = boardRepository.findBoardById(id);
+
+        // 람다식을 사용하여
+        boardData.ifPresent(selectedBoard -> {
+            selectedBoard.setAuthor(boardDTO.getAuthor());
+            selectedBoard.setSubject(boardDTO.getSubject());
+            selectedBoard.setContent(boardDTO.getContent());
+            selectedBoard.setWriteDate(LocalDate.now());
+            selectedBoard.setWriteTime(LocalTime.now());
+            boardRepository.save(selectedBoard);
+        });
+
+        return boardData.orElseGet(boardData::get);
+    }
+
+    public ApiResponse<BoardDTO> updateIsDelBoardById(int id) {
+        // JDK 1.8 Optional에 관해 찾아볼것.
+        Optional<Board> boardData = boardRepository.findBoardById(id);
+        // 위 boardData가 null 이면 RuntimeException 발생시키고 메소드 종료.
+        Board data = boardData.orElseThrow(() -> new RuntimeException("no data"));
+
+        data.setIsDel("Y");
+        boardRepository.save(data); // JPA는 INSERT나 update 같이 save()를 호출
+        return new ApiResponse(true, "board id " + id + " is successfully deleted");
+        }
+
+    }
+
 
 
 
@@ -193,5 +258,3 @@ public class BoardJpaService {
         return builder.toString();
     }*/
 
-
-}

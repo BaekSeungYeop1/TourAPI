@@ -28,10 +28,17 @@
             </v-card-text><hr>
             <v-card-title>
               <v-spacer />
-              <v-btn class="mr-4">
+              <v-btn
+                class="mr-4"
+                @click="linkToUpdate"
+              >
                 수정
               </v-btn>
-              <v-btn>삭제</v-btn>
+              <v-btn
+                @click="deleteBoard"
+              >
+                삭제
+              </v-btn>
             </v-card-title>
           </v-card>
           <v-card />
@@ -56,6 +63,22 @@ export default {
         .then(response=>{
             this.board = response.data.data;
             console.log(response.data);
+          })
+          .catch(e=>{
+            console.log(e);
+          })
+    },
+    linkToUpdate(){
+      let id = this.$route.query.id
+      this.$router.push({path:'./boardupdate',query:{id}})
+    },
+    deleteBoard(){
+      let id = this.$route.query.id
+      this.$axios.delete("/boardjpa/" + id)
+        .then(response=>{
+            console.log(response.data);
+            alert("글이 삭제되었습니다.");
+            this.$router.push('./qna')
           })
           .catch(e=>{
             console.log(e);

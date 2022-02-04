@@ -35,8 +35,6 @@ public class Board {
     private Integer readCount;
     @Column(name = "commentCount")
     private Integer commentCount;
-    @Column(name = "password")
-    private String password;
     @Column(name = "replyRootId")
     private Integer replyRootId;
     @Column(name = "depth")
@@ -54,7 +52,6 @@ public class Board {
                  LocalTime writeTime,
                  Integer readCount,
                  Integer commentCount,
-                 String password,
                  Integer replyRootId,
                  Integer depth,
                  Integer orderNum,
@@ -67,7 +64,6 @@ public class Board {
         this.writeTime = writeTime;
         this.readCount = readCount;
         this.commentCount = commentCount;
-        this.password = password;
         this.replyRootId = replyRootId;
         this.depth = depth;
         this.orderNum = orderNum;

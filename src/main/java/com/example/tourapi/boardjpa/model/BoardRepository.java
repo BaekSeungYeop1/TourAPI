@@ -16,6 +16,11 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
 
     Board findBoardByIdAndIsDel(int Id, String isDel);
 
+    // 최고 Id값을 가진 Board 엔터티를 가져옴
+    Board findTopByOrderByIdDesc();
+
+    Optional<Board> findBoardById(int id);
+
 
 
 

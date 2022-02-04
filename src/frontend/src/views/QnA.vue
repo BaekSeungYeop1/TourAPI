@@ -57,6 +57,7 @@
           depressed
           small
           class="mx-auto gray"
+          @click="linkToEdit()"
         >
           <v-icon> mdi-border-color</v-icon>
         </v-btn>
@@ -94,6 +95,9 @@ export default {
     },
     clickRow(id){
       this.$router.push({path:'./board',query:{id}})
+    },
+    linkToEdit(){
+      this.$router.push({path:'./boardedit'})
     }
   }
 }

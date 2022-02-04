@@ -13,7 +13,7 @@
       >
         <v-card>
           <v-card-title class="text-h5">
-            새글 작성
+            글 수정
           </v-card-title>
           <v-card-text>
             <v-text-field
@@ -80,10 +80,11 @@ export default {
   },
   methods: {
     onSubmit(){
-      this.$axios.post("/boardjpa/", this.board)
+      let id = this.$route.query.id
+      this.$axios.put("/boardjpa/" + id, this.board)
           .then(response=>{
             console.log(response.data);
-            alert("게시글을 성공적으로 등록했습니다.");
+            alert("게시글을 성공적으로 수정했습니다.");
             this.$router.push('./qna')
           })
           .catch(e=>{
