@@ -18,13 +18,13 @@
                 </h1>
                 <v-form>
                   <v-text-field
-                    v-model="userId"
+                    v-model="email"
                     required
                     label="ID"
                     prepend-inner-icon="mdi-account"
                   />
                   <v-text-field
-                    v-model="userPassword"
+                    v-model="password"
                     required
                     prepend-inner-icon="mdi-lock"
                     type="password"
@@ -57,8 +57,8 @@
 export default {
   data () {
     return {
-      userId: '',
-      UserPassword: '',
+      email: '',
+      password: '',
     }
   },
 
@@ -66,8 +66,8 @@ export default {
     loginSubmit() {
       if(this.email&&this.password){
         let saveData = {};
-        saveData.userPassword = this.userId;
-        saveData.userPassword = this.userPassword;
+        saveData.email = this.email;
+        saveData.password = this.password;
         try {
           this.$axios.post("/authenticate", JSON.stringify(saveData), {
             headers: {
@@ -85,8 +85,7 @@ export default {
                 console.log(error.response);
                 if(error.response.status===401){
                   alert("인증오류. 아이디와 비밀번호를 확인해주세요");
-                  this.userId = null;
-                  this.userPassword = null;
+                  this.password = null; this.email = null;
                 }
                });
         } catch (error) {

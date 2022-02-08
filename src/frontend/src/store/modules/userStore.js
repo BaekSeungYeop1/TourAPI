@@ -3,19 +3,19 @@ import router from '@/router'
 const userStore = {
   state: {
     userId: '',
-    userName: '',
+    //userName: '',
     token: ''
   },
   mutations: {
     login: function (state, payload) {
-      state.userId = payload.userId
-      state.userName = payload.userName
+      state.email = payload.email
+      //state.userName = payload.userName
       state.token = payload.token
     },
     loginCheck: function (state) {
       if (!state.token) {
         router.push({
-          name: 'login'
+          name: 'Login'
         }).catch(error => { console.log(error)
         })
       }
