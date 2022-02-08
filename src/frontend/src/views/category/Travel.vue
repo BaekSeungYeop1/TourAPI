@@ -53,12 +53,14 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-pagination
-        v-model="pageNo"
-        :length="numOfPages"
-        total-visible="10"
-        @input="updatePage"
-      />
+      <div class="mt-5">
+        <v-pagination
+          v-model="pageNo"
+          :length="numOfPages"
+          total-visible="10"
+          @input="updatePage"
+        />
+      </div>
     </v-container>
   </v-app>
 </template>

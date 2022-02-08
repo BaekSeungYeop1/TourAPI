@@ -37,6 +37,9 @@
               <p v-if="detailIntro.bookingplace != '' ">
                 예매처 : {{ detailIntro.bookingplace }}
               </p>
+              <p v-if="detailIntro.usetimefestival != '' ">
+                이용요금 : {{ detailIntro.usetimefestival }}
+              </p>
               <p v-if="detailIntro.discountinfofestival != '' ">
                 할인정보 : {{ detailIntro.discountinfofestival }}
               </p>

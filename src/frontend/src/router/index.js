@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
 import Footer from '@/views/Footer.vue'
 import About from '@/views/About.vue'
+import Login from '@/views/Login.vue'
 import AreaTourlist from '@/views/AreaTourlist.vue'
 import KeywordTourlist from '@/views/KeywordTourlist.vue'
 import Searchbar from '@/views/Searchbar.vue'
@@ -23,6 +24,7 @@ import BoardEdit from '@/views/BoardEdit.vue'
 import BoardUpdate from '@/views/BoardUpdate.vue'
 import DetailCulture from '@/views/category/DetailCulture'
 import DetailFestival from '@/views/category/DetailFestival'
+
 Vue.use(VueRouter)
 
 
@@ -41,6 +43,11 @@ const routes = [
     path: '/about',
     name: 'About',
     component: About
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   },
   {
     path: '/areatourlist',
