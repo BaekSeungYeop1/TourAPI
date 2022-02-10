@@ -84,13 +84,18 @@ export default {
   },
   methods:{
     getBoardList(){
-         this.$axios.get("/boardjpa/")
+         this.$axios.get("/boardjpa/",{
+           headers:{
+             Authorization : "Bearer "+ this.$store.state.userStore.token
+        }
+         })
           .then(response=>{
             this.boardList = response.data.data;
             console.log(response.data);
           })
           .catch(e=>{
             console.log(e);
+            this.$store.commit('loginCheck', e.response.status)
           })
     },
     clickRow(id){

@@ -43,6 +43,19 @@
                       Login
                     </v-btn>
                   </v-card-actions>
+                  <v-card-actions>
+                    <v-btn
+                      color="blue lighten-1 text-capitalize"
+                      depressed
+                      large
+                      block
+                      dark
+                      class="mb-3"
+                      @click="signUp()"
+                    >
+                      signUp
+                    </v-btn>
+                  </v-card-actions>
                 </v-form>
               </div>
             </v-card>
@@ -64,6 +77,7 @@ export default {
 
   methods: {
     loginSubmit() {
+      // email,password 입력 확인
       if(this.email&&this.password){
         let saveData = {};
         saveData.email = this.email;
@@ -81,6 +95,7 @@ export default {
                   this.$router.push({path: './'});
                 }
               })
+              // email,password 입력 오류
               .catch(error =>{
                 console.log(error.response);
                 if(error.response.status===401){
