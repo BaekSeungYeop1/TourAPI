@@ -4,6 +4,7 @@ import Home from '@/views/Home.vue'
 import Footer from '@/views/Footer.vue'
 import About from '@/views/About.vue'
 import Login from '@/views/Login.vue'
+import SignUp from '@/views/Signup.vue'
 import AreaTourlist from '@/views/AreaTourlist.vue'
 import KeywordTourlist from '@/views/KeywordTourlist.vue'
 import Searchbar from '@/views/Searchbar.vue'
@@ -48,6 +49,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/signup',
+    name: 'SignUp',
+    component: SignUp
   },
   {
     path: '/areatourlist',

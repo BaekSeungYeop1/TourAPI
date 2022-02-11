@@ -20,7 +20,7 @@
                   <v-text-field
                     v-model="email"
                     required
-                    label="ID"
+                    label="Email"
                     prepend-inner-icon="mdi-account"
                   />
                   <v-text-field
@@ -110,10 +110,10 @@ export default {
         alert("아이디 혹은 비밀번호가 입력되지 않았습니다")
       }
       },
+      signUp(){
+        this.$router.push({path:"./signup"});
+      }
   },
-
-
-
 
 }
 
