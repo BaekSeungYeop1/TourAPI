@@ -21,13 +21,15 @@ public class Member {
     @Column(unique = true)
     private String email;
     private String password;
+    private String nickname;
 
-    public Member(String email, String password) {
+    public Member(String email, String password, String nickname) {
         this.email = email;
         this.password = password;
+        this.nickname = nickname;
     }
 
-    public static Member createMember(String email, String password){
-        return new Member(email, password);
+    public static Member createMember(String email, String password, String nickname){
+        return new Member(email, password, nickname);
     }
 }

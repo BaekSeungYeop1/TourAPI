@@ -1,31 +1,35 @@
 package com.example.tourapi.security.controller;
 
-import com.example.tourapi.member.Member;
-import com.example.tourapi.member.MemberRepository;
+
+import com.example.tourapi.security.service.MemberService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
 public class MemberController {
 
-    final MemberRepository memberRepository;
+
+    final MemberService memberService;
     final PasswordEncoder passwordEncoder;
 
     @PostMapping("/api/member")
-    public String saveMember(@RequestBody MemberDto memberDto){
-        memberRepository.save(Member.createMember(memberDto.getEmail(),
-                passwordEncoder.encode(memberDto.getPassword())));
+    public String saveMember(@RequestBody @Valid MemberDto memberDto) throws Exception{
+        memberService.saveMember(memberDto);
         return "success";
+    }
+
+    @PostMapping("/signup")
+    public String checkNickname(@RequestBody MemberDto memberDto){
+
+        return null;
     }
 }
 
-@Data
-class MemberDto{
-    private String email;
-    private String password;
-}

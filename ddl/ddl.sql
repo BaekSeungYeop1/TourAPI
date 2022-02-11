@@ -1,13 +1,5 @@
-DROP table IF EXISTS test
 DROP table IF EXISTS Comment
 DROP table IF EXISTS Board
-
-
-CREATE TABLE `test` (
-                        `id` int(11) NOT NULL AUTO_INCREMENT,
-                        `name` varchar(300) NOT NULL,
-                        PRIMARY KEY (`id`)
-)
 
 -- 게시글
 CREATE TABLE `board` (
@@ -51,4 +43,11 @@ ALTER TABLE Comment
             REFERENCES Board ( -- 게시글
                               id -- 게시글id
                 );
+
+create table member(
+                       id bigint primary key AUTO_INCREMENT,
+                       email varchar(300)		NOT NULL,
+                       password varchar(3000)	NOT NULL,
+                       nickname VARCHAR(300)		NOT NULL
+)
 
