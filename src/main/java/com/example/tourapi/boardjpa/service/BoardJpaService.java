@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -69,20 +70,29 @@ public class BoardJpaService {
         return result;
     }
 
-    public Board putBoard(int id, BoardDTO boardDTO) {
-        Optional<Board> boardData = boardRepository.findBoardById(id);
+    public ApiResponse<BoardDTO> putBoard(int id, BoardDTO boardDTO) {
 
-        // 람다식을 사용하여
-        boardData.ifPresent(selectedBoard -> {
-            selectedBoard.setAuthor(boardDTO.getAuthor());
-            selectedBoard.setSubject(boardDTO.getSubject());
-            selectedBoard.setContent(boardDTO.getContent());
-            selectedBoard.setWriteDate(LocalDate.now());
-            selectedBoard.setWriteTime(LocalTime.now());
-            boardRepository.save(selectedBoard);
-        });
+        // 글을 수정할시 작성자가 동일한지 체크
+        String getNickname = boardDTO.getAuthor();
+        String Nickname = boardRepository.getAuthorById(id);
+        if (Objects.equals(getNickname, Nickname)){
+            Optional<Board> boardData = boardRepository.findBoardById(id);
 
-        return boardData.orElseGet(boardData::get);
+            // 람다식을 사용하여
+            boardData.ifPresent(selectedBoard -> {
+                selectedBoard.setSubject(boardDTO.getSubject());
+                selectedBoard.setContent(boardDTO.getContent());
+                selectedBoard.setWriteDate(LocalDate.now());
+                selectedBoard.setWriteTime(LocalTime.now());
+                boardRepository.save(selectedBoard);
+            });
+
+            Board data = boardData.orElseGet(boardData::get);
+            return new ApiResponse(true, data);
+
+        }
+
+        return new ApiResponse(false, "no authority");
     }
 
     public ApiResponse<BoardDTO> updateIsDelBoardById(int id) {

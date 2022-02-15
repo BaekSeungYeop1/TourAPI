@@ -21,6 +21,9 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
 
     Optional<Board> findBoardById(int id);
 
+    @Query("Select b.author From Board b Where b.id = ?1")
+    String getAuthorById(int id);
+
 
 
 

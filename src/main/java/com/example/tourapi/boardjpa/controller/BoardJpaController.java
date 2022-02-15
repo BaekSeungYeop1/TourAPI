@@ -41,8 +41,8 @@ public class BoardJpaController {
     @PutMapping(value = "/{id}")
     public ApiResponse<BoardDTO> putBoard(@PathVariable int id,
                                           @RequestBody BoardDTO boardDTO){
-        Board data = boardJpaService.putBoard(id, boardDTO);
-        return new ApiResponse(true, data);
+
+        return boardJpaService.putBoard(id,boardDTO);
     }
     // DB에 데이터를 DELETE 시키지 말고, board 컬럼 중 isDel 을 "Y"로 업데이트.
 
