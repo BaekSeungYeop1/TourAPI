@@ -13,4 +13,9 @@ public class GlobalException {
     public JSONObject duplicateEmailException(){
         return ErrorResponse.JsonErrorResponse(400, "중복된 이메일 입니다.");
     }
+
+    @ExceptionHandler(DuplicateNicknameException.class)
+    public JSONObject duplicateNicknameException(){
+        return ErrorResponse.JsonErrorResponse(400, "중복된 닉네임 입니다.");
+    }
 }
