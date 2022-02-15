@@ -44,11 +44,12 @@ public class BoardJpaController {
 
         return boardJpaService.putBoard(id,boardDTO);
     }
-    // DB에 데이터를 DELETE 시키지 말고, board 컬럼 중 isDel 을 "Y"로 업데이트.
 
+    // DB에 데이터를 DELETE 시키지 말고, board 컬럼 중 isDel 을 "Y"로 업데이트.
     @DeleteMapping(value = "/{id}")
-    public ApiResponse<BoardDTO> updateIsDelBoardById(@PathVariable int id){
-        return boardJpaService.updateIsDelBoardById(id);
+    public ApiResponse<BoardDTO> updateIsDelBoardById(@PathVariable int id,
+                                                      @RequestBody BoardDTO boardDTO){
+        return boardJpaService.updateIsDelBoardById(id,boardDTO);
     }
 
 

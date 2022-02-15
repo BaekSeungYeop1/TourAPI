@@ -78,11 +78,24 @@ export default {
     },
     deleteBoard(){
       let id = this.$route.query.id
-      this.$axios.delete("/boardjpa/" + id)
+      let author = this.$store.state.userStore.nickname
+      this.$axios.delete("/boardjpa/" + id,{
+        headers:{
+          Authorization : "Bearer "+ this.$store.state.userStore.token
+        },
+        data: {
+          author : author
+        }
+      })
         .then(response=>{
+          if(response.data.success === true){
             console.log(response.data);
             alert("글이 삭제되었습니다.");
             this.$router.push('./qna')
+          }
+          else{
+            alert("글을 삭제할 권한이 없습니다")
+          }
           })
           .catch(e=>{
             console.log(e);

@@ -95,7 +95,12 @@ public class BoardJpaService {
         return new ApiResponse(false, "no authority");
     }
 
-    public ApiResponse<BoardDTO> updateIsDelBoardById(int id) {
+    public ApiResponse<BoardDTO> updateIsDelBoardById(int id, BoardDTO boardDTO) {
+
+        // 글을 삭제할시 작성자가 동일한지 체크
+        String getNickname = boardDTO.getAuthor();
+        String Nickname = boardRepository.getAuthorById(id);
+        if (Objects.equals(getNickname, Nickname)){
         // JDK 1.8 Optional에 관해 찾아볼것.
         Optional<Board> boardData = boardRepository.findBoardById(id);
         // 위 boardData가 null 이면 RuntimeException 발생시키고 메소드 종료.
@@ -105,8 +110,9 @@ public class BoardJpaService {
         boardRepository.save(data); // JPA는 INSERT나 update 같이 save()를 호출
         return new ApiResponse(true, "board id " + id + " is successfully deleted");
         }
-
+        return new ApiResponse(false, "no authority");
     }
+}
 
 
 

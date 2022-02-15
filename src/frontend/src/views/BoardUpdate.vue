@@ -74,8 +74,9 @@ export default {
       board.subject = this.subject
       board.content = this.content
       board.author = this.$store.state.userStore.nickname
-      this.$axios.put("/boardjpa/" + id, board,{
+      this.$axios.put("/boardjpa/" + id, JSON.stringify(board),{
            headers:{
+             "Content-Type": `application/json`,
              Authorization : "Bearer "+ this.$store.state.userStore.token
         }
       })
