@@ -59,7 +59,11 @@ export default {
   methods:{
     getBoard(){
       let id = this.$route.query.id
-      this.$axios.get("/boardjpa/" + id)
+      this.$axios.get("/boardjpa/" + id,{
+           headers:{
+             Authorization : "Bearer "+ this.$store.state.userStore.token
+        }
+      })
         .then(response=>{
             this.board = response.data.data;
             console.log(response.data);

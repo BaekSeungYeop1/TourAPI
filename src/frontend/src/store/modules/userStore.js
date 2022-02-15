@@ -2,14 +2,14 @@ import router from '@/router'
 
 const userStore = {
   state: {
-    userId: '',
-    //userName: '',
+    email: '',
+    nickname: '',
     token: ''
   },
   mutations: {
     login: function (state, payload) {
       state.email = payload.email
-      //state.userName = payload.userName
+      state.nickname = payload.nickname
       state.token = payload.token
     },
     loginCheck: function (state, payload) {

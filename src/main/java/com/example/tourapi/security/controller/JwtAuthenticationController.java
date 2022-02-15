@@ -25,7 +25,7 @@ public class JwtAuthenticationController {
                 .authenticateByEmailAndPassword(authenticationRequest.getEmail(),
                         authenticationRequest.getPassword());
         final String token = jwtTokenUtil.generateToken(member.getEmail());
-        return ResponseEntity.ok(new JwtResponse(token));
+        return ResponseEntity.ok(new JwtResponse(token, member.getNickname()));
     }
 }
 
@@ -39,4 +39,5 @@ class JwtRequest {
 @AllArgsConstructor
 class JwtResponse {
     private String token;
+    private String nickname;
 }

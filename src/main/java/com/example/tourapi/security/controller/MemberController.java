@@ -26,10 +26,5 @@ public class MemberController {
         return "success";
     }
 
-    @PostMapping("/signup")
-    public String checkNickname(@RequestBody MemberDto memberDto){
-
-        return null;
-    }
 }
 

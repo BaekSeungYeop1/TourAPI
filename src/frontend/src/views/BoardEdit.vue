@@ -17,7 +17,7 @@
           </v-card-title>
           <v-card-text>
             <v-text-field
-              v-model="board.subject"
+              v-model="subject"
               outlined
               label="제목"
               type="text"
@@ -25,15 +25,7 @@
               required
             />
             <v-textarea
-              v-model="board.author"
-              outlined
-              label="작성자"
-              type="text"
-              placeholder="작성자"
-              required
-            />
-            <v-textarea
-              v-model="board.content"
+              v-model="content"
               outlined
               label="내용"
               type="text"
@@ -69,18 +61,23 @@
 export default {
   name: 'NewConsult',
   data: () => ({
-    board: {
     subject : '',
     content : '',
-    author : ''
-    }
   }),
   computed: {
 
   },
   methods: {
     onSubmit(){
-      this.$axios.post("/boardjpa/", this.board)
+      let board = {};
+      board.subject = this.subject
+      board.content = this.content
+      board.author = this.$store.state.userStore.nickname
+      this.$axios.post("/boardjpa/", board, {
+        headers:{
+             Authorization : "Bearer "+ this.$store.state.userStore.token
+        }
+      })
           .then(response=>{
             console.log(response.data);
             alert("게시글을 성공적으로 등록했습니다.");
