@@ -16,7 +16,7 @@
                 >
                   SignUp
                 </h1>
-                <v-form v-model="isValid">
+                <v-form ref="form">
                   <v-text-field
                     v-model="email"
                     required
@@ -24,28 +24,14 @@
                     label="Email"
                     prepend-inner-icon="mdi-email"
                   />
-                  <div>
-                    <div>
-                      <v-text-field
-                        v-model="nickname"
-                        required
-                        prepend-inner-icon="mdi-account"
-                        label="Nickname"
-                        :counter="10"
-                        :rules="nameRules"
-                      />
-                    </div>
-                    <div>
-                      <v-spacer />
-                      <v-btn
-                        color="blue lighten-1"
-                        dark
-                        width="80px"
-                      >
-                        중복 확인
-                      </v-btn>
-                    </div>
-                  </div>
+                  <v-text-field
+                    v-model="nickname"
+                    required
+                    prepend-inner-icon="mdi-account"
+                    label="Nickname"
+                    :counter="10"
+                    :rules="nameRules"
+                  />
                   <v-text-field
                     v-model="password"
                     required
@@ -121,7 +107,7 @@ export default {
           v => /([!@$%])/.test(v) || '특수문자를 포함해야합니다 [!@#$%]',
 
         ],
-        nickName : "",
+        nickname : "",
         nameRules: [
           v => !!v || '닉네임을 작성해주세요',
           v => (v && v.length <= 10) || '닉네임을 10글자를 넘을 수 없습니다.',
@@ -130,13 +116,43 @@ export default {
     computed:{
       passwordConfirmationRule() {
       return () =>
-        this.password === this.confirmPassword || "패스워드가 일치하지 않습니다";
+        this.password !== this.confirmPassword || "패스워드가 일치하지 않습니다";
     }
     },
     methods: {
-        signup() {
-            console.log("Signup", this.email, this.password, this.confirm);
-        },
+        signUpSubmit(){
+          const validate = this.$refs.form.validate()
+          if(validate){
+          let saveData = {};
+          saveData.email = this.email;
+          saveData.password = this.password;
+          saveData.nickname = this.nickname;
+
+          try {
+             this.$axios.post("/api/member", JSON.stringify(saveData), {
+               headers: {
+                 "Content-Type": `application/json`,
+                  },
+                  })
+                  .then((response) => {
+                    console.log(response)
+                    if (response.data.errorCode === 400) {
+                      alert(response.data.errorMessage)
+
+                      }
+                      else{
+                        alert("회원가입이 완료되었습니다. 로그인 화면으로 돌아갑니다")
+                        this.$router.push({path: './login'});
+                      }
+                      })
+            .catch(error =>{
+              console.log(error.response);
+
+            });
+      } catch (error) {
+        console.error(error);
+      }
+        }},
         linkToLogin(){
           this.$router.push({path:"./login"});
         }

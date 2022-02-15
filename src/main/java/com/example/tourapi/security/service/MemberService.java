@@ -22,7 +22,6 @@ public class MemberService {
     @Transactional
     public void saveMember(MemberDto memberDto) throws Exception {
         validateDuplicateEmail(memberDto.getEmail(),memberDto.getNickname());
-
         memberRepository.save(Member.createMember(
                 memberDto.getEmail(),
                 passwordEncoder.encode(memberDto.getPassword()),
