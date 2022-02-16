@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +22,14 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
 
     Optional<Board> findBoardById(int id);
 
+
     @Query("Select b.author From Board b Where b.id = ?1")
     String getAuthorById(int id);
+
+    @Transactional
+    @Modifying
+    @Query("Update Board b set b.readCount = b.readCount + 1 where b.id = ?1")
+    void viewCountUp(int id);
 
 
 

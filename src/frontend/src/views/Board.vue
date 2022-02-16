@@ -55,6 +55,7 @@ export default {
   }),
    mounted(){
      this.getBoard();
+     this.getCookie();
   },
   methods:{
     getBoard(){
@@ -100,6 +101,17 @@ export default {
           .catch(e=>{
             console.log(e);
           })
+    },
+    getCookie(){
+      let id = this.$route.query.id;
+      this.$axios.get("boardjpa/views/"+ id,{
+        headers:{
+          Authorization : "Bearer "+ this.$store.state.userStore.token
+      },
+      })
+
+      const cookie = this.$cookies.get('viewCount');
+      console.log(cookie); //testValue
     }
   }
 }

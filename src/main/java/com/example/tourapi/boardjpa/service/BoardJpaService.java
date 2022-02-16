@@ -26,6 +26,10 @@ public class BoardJpaService {
     public final BoardRepository boardRepository;
     public final CommentDAO commentDAO;
 
+    public void viewCountUp(int id) {
+        boardRepository.viewCountUp(id);
+    }
+
     public List<Board> getBoardList() {
         return boardRepository.findBoardsByIsDel("N");
     }

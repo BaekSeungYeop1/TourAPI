@@ -4,7 +4,10 @@ import vuetify from './plugins/vuetify'
 import router from './router'
 import store from './store'
 import axios from 'axios'
+import VueCookies from "vue-cookies";
 
+
+Vue.use(VueCookies);
 Vue.prototype.$axios = axios
 
 Vue.config.productionTip = false

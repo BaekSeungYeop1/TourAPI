@@ -9,6 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -51,6 +54,44 @@ public class BoardJpaController {
                                                       @RequestBody BoardDTO boardDTO){
         return boardJpaService.updateIsDelBoardById(id,boardDTO);
     }
+
+    /**
+     조회수 중복 방지
+     **/
+    @GetMapping(value = "/views/{id}")
+    private void viewCountUp(@PathVariable int id,
+                             HttpServletRequest request,
+                             HttpServletResponse response) {
+
+        Cookie oldCookie = null;
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("viewCount")) {
+                    oldCookie = cookie;
+                }
+            }
+        }
+
+        if (oldCookie != null) {
+            if (!oldCookie.getValue().contains("[" + id + "]")) {
+                log.info("기존 쿠키가 있지만 해당 board 조회가 없을 때");
+                boardJpaService.viewCountUp(id);
+                oldCookie.setValue(oldCookie.getValue() + "_[" + id + "]");
+                oldCookie.setPath("/");
+                oldCookie.setMaxAge(60 * 60 * 24);
+                response.addCookie(oldCookie);
+            }
+        } else {
+            log.info("기존 쿠키가 없을 때\"");
+            boardJpaService.viewCountUp(id);
+            Cookie newCookie = new Cookie("viewCount","[" + id + "]");
+            newCookie.setPath("/");
+            newCookie.setMaxAge(60 * 60 * 24);
+            response.addCookie(newCookie);
+        }
+    }
+
 
 
     /*
