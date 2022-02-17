@@ -92,6 +92,7 @@ export default {
           })
           .catch(e=>{
             console.log(e);
+            this.$store.commit('loginCheck', e.response.status)
           })
     }
 

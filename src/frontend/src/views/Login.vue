@@ -92,7 +92,7 @@ export default {
                 if (response.status === 200) {
                   alert("로그인 성공")
                   this.$store.commit('login', response.data)
-                  this.$router.push({path: './'});
+                  this.$router.push({path: './qna'});
                 }
               })
               // email,password 입력 오류

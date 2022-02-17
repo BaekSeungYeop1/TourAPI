@@ -103,7 +103,7 @@ export default {
     },
     linkToEdit(){
       this.$router.push({path:'./boardedit'})
-    }
+    },
   }
 }
 </script>

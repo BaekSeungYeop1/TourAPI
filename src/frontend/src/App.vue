@@ -10,6 +10,15 @@
 
       <v-spacer />
       <v-btn
+        v-if="this.$store.state.userStore.isLogin"
+        flat
+        color="dark"
+        style="margin-right:5px;"
+        @click="logout()"
+      >
+        <span>로그아웃</span>
+      </v-btn>
+      <v-btn
         flat
         color="dark"
         style="margin-right:5px;"
@@ -139,6 +148,10 @@ export default {
     },
     PageLink(){
        this.$router.push({path:"./qna"});
+    },
+    logout(){
+      this.$store.commit('logout');
+      this.$router.push({path:"./"});
     }
   }
 };
