@@ -25,6 +25,10 @@ import BoardEdit from '@/views/BoardEdit.vue'
 import BoardUpdate from '@/views/BoardUpdate.vue'
 import DetailCulture from '@/views/category/DetailCulture'
 import DetailFestival from '@/views/category/DetailFestival'
+import DetailFood from '@/views/category/DetailFood'
+import DetailShopping from '@/views/category/DetailShopping'
+import DetailLeports from '@/views/category/DetailLeports'
+import DetailAccommodation from '@/views/category/DetailAccommodation'
 
 Vue.use(VueRouter)
 
@@ -155,6 +159,27 @@ const routes = [
     name: 'DetailFestival',
     component: DetailFestival
   },
+  {
+    path: '/detailfood',
+    name: 'DetailFood',
+    component: DetailFood
+  },
+  {
+    path: '/detailshopping',
+    name: 'DetailShopping',
+    component: DetailShopping
+  },
+  {
+    path: '/detailleports',
+    name: 'DetailLeports',
+    component: DetailLeports
+  },
+  {
+    path: '/detailaccommodation',
+    name: 'DetailAccommodation',
+    component: DetailAccommodation
+  },
+
 
 ]
 
