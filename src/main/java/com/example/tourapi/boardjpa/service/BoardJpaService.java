@@ -7,10 +7,7 @@ import com.example.tourapi.comment.model.CommentDAO;
 import com.example.tourapi.common.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -77,9 +74,8 @@ public class BoardJpaService {
     public ApiResponse<BoardDTO> putBoard(int id, BoardDTO boardDTO) {
 
         // 글을 수정할시 작성자가 동일한지 체크
-        String getNickname = boardDTO.getAuthor();
-        String Nickname = boardRepository.getAuthorById(id);
-        if (Objects.equals(getNickname, Nickname)){
+        boolean checkNick = this.checkNick(id,boardRepository,boardDTO);
+        if (checkNick){
             Optional<Board> boardData = boardRepository.findBoardById(id);
 
             // 람다식을 사용하여
@@ -99,12 +95,20 @@ public class BoardJpaService {
         return new ApiResponse(false, "no authority");
     }
 
-    public ApiResponse<BoardDTO> updateIsDelBoardById(int id, BoardDTO boardDTO) {
-
-        // 글을 삭제할시 작성자가 동일한지 체크
+    private boolean checkNick(int id, BoardRepository boardRepository, BoardDTO boardDTO) {
         String getNickname = boardDTO.getAuthor();
         String Nickname = boardRepository.getAuthorById(id);
         if (Objects.equals(getNickname, Nickname)){
+            return true;
+        }else
+            return false;
+    }
+
+    public ApiResponse<BoardDTO> updateIsDelBoardById(int id, BoardDTO boardDTO) {
+
+        // 글을 삭제할시 작성자가 동일한지 체크
+        boolean checkNick = this.checkNick(id,boardRepository,boardDTO);
+        if (checkNick){
         // JDK 1.8 Optional에 관해 찾아볼것.
         Optional<Board> boardData = boardRepository.findBoardById(id);
         // 위 boardData가 null 이면 RuntimeException 발생시키고 메소드 종료.
