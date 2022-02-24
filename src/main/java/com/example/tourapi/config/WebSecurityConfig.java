@@ -43,15 +43,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .authorizeRequests().antMatchers("/authenticate", "/api/member", "/apitest/*").permitAll()
-                .anyRequest().authenticated()
+                .csrf().disable() // Rest API 서버이기때문에 CSRF 보안이 필요없으므로 처리를 해제
+                .authorizeRequests() // 다음 리퀘스트에 대한 사용권한 체크
+                .antMatchers("/authenticate", "/api/member", "/apitest/*").permitAll() // 해당하는 주소는 누구나 접근 가능
+                .anyRequest().authenticated() // 그외 나머지 요청은 인증된 회원만 접근 가능
                 .and()
-                .exceptionHandling()
-                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .exceptionHandling()// 예외처리 기능 수행
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint) // 인증 실패 진입점
                 .and()
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS); // 세션을 사용하지 않으므로 STATELESS로 설정
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }

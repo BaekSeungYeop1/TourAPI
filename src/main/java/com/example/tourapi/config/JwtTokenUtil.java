@@ -30,14 +30,17 @@ public class JwtTokenUtil {
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
     }
 
+    // 토큰만료 확인
     private Boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDateFromToken(token);
         return expiration.before(new Date());
     }
 
     public Date getExpirationDateFromToken(String token) {
+
         return getClaimFromToken(token, Claims::getExpiration);
     }
+
 
     public String generateToken(String id) {
         return generateToken(id, new HashMap<>());
@@ -47,16 +50,18 @@ public class JwtTokenUtil {
         return doGenerateToken(id, claims);
     }
 
+    // JWT 토큰 생성
     private String doGenerateToken(String id, Map<String, Object> claims) {
         return Jwts.builder()
-                .setClaims(claims)
-                .setId(id)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY_HOUR))
-                .signWith(SignatureAlgorithm.HS512, secret)
+                .setClaims(claims) // 정보 저장
+                .setId(id) // email 정보
+                .setIssuedAt(new Date(System.currentTimeMillis())) // 토큰 발행시간 정보
+                .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY_HOUR)) // 토큰만료시간 정보
+                .signWith(SignatureAlgorithm.HS512, secret) //사용활 암호화 알고리즘 + signature에 들어갈 secret 값 세팅
                 .compact();
     }
 
+    // 토큰
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUsernameFromToken(token);
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
