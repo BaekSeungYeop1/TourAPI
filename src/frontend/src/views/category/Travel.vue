@@ -12,8 +12,19 @@
             @click="clickEvent(tour.contentid,tour.contenttypeid,tour.mapx,tour.mapy)"
           >
             <v-img
+              v-if="tour.firstimage"
               aspect-ratio="2"
               :src="tour.firstimage"
+            >
+              <v-container
+                fill-height
+                fluid
+              />
+            </v-img>
+            <v-img
+              v-else
+              aspect-ratio="2"
+              src="@/assets/noImage.png"
             >
               <v-container
                 fill-height
@@ -75,6 +86,7 @@ export default {
     numOfRows: 9,        // 페이지 당 출력되는 개수
     paging:[],            // 출력되는 관광지 총 갯수를 알기위해 paging.totalcount
     selectedArea: undefined,
+    error: true,
   }),
   computed: {
     numOfPages () {

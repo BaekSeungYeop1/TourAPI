@@ -12,8 +12,19 @@
             @click="clickEvent(tour.contentid,tour.contenttypeid,tour.mapx,tour.mapy)"
           >
             <v-img
+              v-if="tour.firstimage"
               aspect-ratio="2"
               :src="tour.firstimage"
+            >
+              <v-container
+                fill-height
+                fluid
+              />
+            </v-img>
+            <v-img
+              v-else
+              aspect-ratio="2"
+              src="@/assets/noImage.png"
             >
               <v-container
                 fill-height

@@ -7,7 +7,6 @@
         dense
       >
         <v-col>
-          {{ tours.contentid }}
           <v-card>
             <v-row
               justify="center"

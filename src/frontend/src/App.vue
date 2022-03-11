@@ -116,7 +116,7 @@ export default {
 
   data: () => ({
     searchKeyword: "",
-    drawer : false,
+    drawer : true,
     visiableRouter : ["Travel","Culture","Festival","Travelcourse","Leports","Accommodation","Shopping","Food"],
     gradient: 'rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)',
     categories : [

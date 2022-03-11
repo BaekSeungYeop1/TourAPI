@@ -7,10 +7,8 @@
         dense
       >
         <v-col>
-          {{ tours.contentid }}
           <v-card>
             <v-carousel
-
               :cycle="true"
               :interval="5000"
             >
