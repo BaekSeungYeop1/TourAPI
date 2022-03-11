@@ -4,7 +4,7 @@
 
 * 공공데이터를 이용한 관광지 소개 사이트
 
-![img.png](img.png)
+![img.png](image/Image.PNG)
 
 ### 세부 페이지
 * 관광지 리스트 [Blog](https://bsy-96.tistory.com/107)
